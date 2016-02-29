@@ -103,7 +103,7 @@ namespace ColorReplacer
             var ofd = new OpenFileDialog();
             ofd.Title = "Specify a Source file name and file path";
             ofd.Filter = "Jpeg Images(*.jpg)|*.jpg|Png Images(*.png)|*.png|Bitmap Images(*.bmp)|*.bmp";
-
+            int maximal = 1000;
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 var streamReader = new StreamReader(ofd.FileName);
@@ -111,11 +111,29 @@ namespace ColorReplacer
                 streamReader.Close();
 
                 picSource.Image = sourceBitmap.Format32bppArgbCopy();
-
+                if (picSource.Image.Width > maximal || picSource.Image.Height > maximal)
+                {
+                    double mul =(double) picSource.Image.Width/picSource.Image.Height;
+                    if (mul.CompareTo(1.0) >= 0)
+                    {
+                        picSource.Image = resizeImage(picSource.Image,
+                            new Size(maximal, (int) (maximal/mul)));
+                    }
+                    else
+                    {
+                        picSource.Image = resizeImage(picSource.Image,
+                            new Size((int) (maximal*mul), maximal));
+                    }
+                }
                 ApplyFilter();
             }
         }
+        public static Image resizeImage(Image imgToResize, Size size)
+        {
+            return (Image)(new Bitmap(imgToResize, size));
+        }
 
+   
         private void btnSave_Click(object sender, EventArgs e)
         {
             if (picResult.Image != null)
