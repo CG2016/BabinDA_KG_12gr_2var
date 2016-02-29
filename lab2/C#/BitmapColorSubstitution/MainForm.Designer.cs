@@ -35,6 +35,7 @@
             this.btnLoad = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.pnlFilter = new System.Windows.Forms.Panel();
+            this.hueTB = new System.Windows.Forms.TrackBar();
             this.btnSelectReplacementColor = new System.Windows.Forms.Button();
             this.pnlResultColor = new System.Windows.Forms.Panel();
             this.lblReplacementColor = new System.Windows.Forms.Label();
@@ -45,12 +46,14 @@
             this.trcThreshHold = new System.Windows.Forms.TrackBar();
             this.lblColorFilter = new System.Windows.Forms.Label();
             this.btnResultAsSource = new System.Windows.Forms.Button();
-            this.hueTB = new System.Windows.Forms.TrackBar();
+            this.picker = new System.Windows.Forms.Label();
+            this.picker2 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.picSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picResult)).BeginInit();
             this.pnlFilter.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trcThreshHold)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.hueTB)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trcThreshHold)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picker2)).BeginInit();
             this.SuspendLayout();
             // 
             // picSource
@@ -66,7 +69,7 @@
             this.picSource.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picSource.TabIndex = 0;
             this.picSource.TabStop = false;
-            this.picSource.MouseUp += new System.Windows.Forms.MouseEventHandler(this.PictureBoxMouseUpEventHandler);
+            this.picSource.MouseUp += new System.Windows.Forms.MouseEventHandler(this.PictureBox1MouseUpEventHandler);
             // 
             // picResult
             // 
@@ -80,7 +83,7 @@
             this.picResult.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picResult.TabIndex = 1;
             this.picResult.TabStop = false;
-            this.picResult.MouseUp += new System.Windows.Forms.MouseEventHandler(this.PictureBoxMouseUpEventHandler);
+            this.picResult.MouseMove += new System.Windows.Forms.MouseEventHandler(this.picResult_MouseMove);
             // 
             // lblSource
             // 
@@ -140,6 +143,17 @@
             this.pnlFilter.Name = "pnlFilter";
             this.pnlFilter.Size = new System.Drawing.Size(149, 326);
             this.pnlFilter.TabIndex = 6;
+            // 
+            // hueTB
+            // 
+            this.hueTB.AutoSize = false;
+            this.hueTB.Location = new System.Drawing.Point(3, 295);
+            this.hueTB.Maximum = 360;
+            this.hueTB.Name = "hueTB";
+            this.hueTB.Size = new System.Drawing.Size(141, 32);
+            this.hueTB.TabIndex = 10;
+            this.hueTB.TickFrequency = 10;
+            this.hueTB.Scroll += new System.EventHandler(this.hueTB_Scroll);
             // 
             // btnSelectReplacementColor
             // 
@@ -243,22 +257,30 @@
             this.btnResultAsSource.UseVisualStyleBackColor = true;
             this.btnResultAsSource.Click += new System.EventHandler(this.btnResultAsSource_Click);
             // 
-            // hueTB
+            // picker
             // 
-            this.hueTB.AutoSize = false;
-            this.hueTB.Location = new System.Drawing.Point(3, 295);
-            this.hueTB.Maximum = 360;
-            this.hueTB.Name = "hueTB";
-            this.hueTB.Size = new System.Drawing.Size(141, 32);
-            this.hueTB.TabIndex = 10;
-            this.hueTB.TickFrequency = 10;
-            this.hueTB.Scroll += new System.EventHandler(this.hueTB_Scroll);
+            this.picker.AutoSize = true;
+            this.picker.Location = new System.Drawing.Point(418, 447);
+            this.picker.Name = "picker";
+            this.picker.Size = new System.Drawing.Size(99, 13);
+            this.picker.TabIndex = 10;
+            this.picker.Text = "R:000 G:000 B:000";
+            // 
+            // picker2
+            // 
+            this.picker2.Location = new System.Drawing.Point(523, 443);
+            this.picker2.Name = "picker2";
+            this.picker2.Size = new System.Drawing.Size(23, 21);
+            this.picker2.TabIndex = 11;
+            this.picker2.TabStop = false;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(980, 446);
+            this.ClientSize = new System.Drawing.Size(980, 476);
+            this.Controls.Add(this.picker2);
+            this.Controls.Add(this.picker);
             this.Controls.Add(this.btnResultAsSource);
             this.Controls.Add(this.lblColorFilter);
             this.Controls.Add(this.pnlFilter);
@@ -278,9 +300,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.picResult)).EndInit();
             this.pnlFilter.ResumeLayout(false);
             this.pnlFilter.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trcThreshHold)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.hueTB)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trcThreshHold)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picker2)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -304,6 +328,8 @@
         private System.Windows.Forms.Label lblColorFilter;
         private System.Windows.Forms.Button btnResultAsSource;
         private System.Windows.Forms.TrackBar hueTB;
+        private System.Windows.Forms.Label picker;
+        private System.Windows.Forms.PictureBox picker2;
     }
 }
 

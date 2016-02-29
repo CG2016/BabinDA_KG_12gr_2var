@@ -28,7 +28,7 @@ namespace ColorReplacer
                 filterData.NewColor = pnlResultColor.BackColor;
 
                 picResult.Image = ((Bitmap)picSource.Image).ColorSubstitution(filterData);
-
+               
                 pnlFilter.Enabled = true;
                 btnSave.Enabled = true;
                 btnResultAsSource.Enabled = true;
@@ -37,18 +37,7 @@ namespace ColorReplacer
 
         private void PictureBoxMouseUpEventHandler(object sender, MouseEventArgs e)
         {
-            if (sender is PictureBox)
-            {
-                var eventSource = (PictureBox)sender;
-
-                using (var bmpSource = new Bitmap(eventSource.Width, eventSource.Height))
-                {
-                    picSource.DrawToBitmap(bmpSource, new Rectangle(0, 0, eventSource.Width, eventSource.Height));
-                    pnlSourceColor.BackColor = bmpSource.GetPixel(e.X, e.Y);
-                }
-
-                ApplyFilter();
-            }
+            
         }
 
         private void trcThreshHold_ValueChanged(object sender, EventArgs e)
@@ -98,6 +87,7 @@ namespace ColorReplacer
             }
         }
 
+        private double gmul = 0;
         private void btnLoad_Click(object sender, EventArgs e)
         {
             var ofd = new OpenFileDialog();
@@ -114,6 +104,7 @@ namespace ColorReplacer
                 if (picSource.Image.Width > maximal || picSource.Image.Height > maximal)
                 {
                     double mul =(double) picSource.Image.Width/picSource.Image.Height;
+                    gmul = mul;
                     if (mul.CompareTo(1.0) >= 0)
                     {
                         picSource.Image = resizeImage(picSource.Image,
@@ -188,5 +179,43 @@ namespace ColorReplacer
             ApplyFilter();
         }
 
+        private void picResult_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (sender is PictureBox)
+            {
+
+                var eventSource = (PictureBox)sender;
+                using (var bmpSource = new Bitmap(eventSource.Width, eventSource.Height))
+                {
+                    picResult.DrawToBitmap(bmpSource, new Rectangle(0, 0, eventSource.Width, eventSource.Height));
+
+                    Color color = bmpSource.GetPixel(e.X, e.Y);
+                    picker2.BackColor = color;
+                    picker.Text = String.Format("R:{0:D3} G:{1:D3} B:{2:D3}", color.R, color.G, color.B);
+                }
+            }
+        }
+
+        private void PictureBox2MouseUpEventHandler(object sender, MouseEventArgs e)
+        {
+            
+        }
+
+        private void PictureBox1MouseUpEventHandler(object sender, MouseEventArgs e)
+        {
+            if (sender is PictureBox)
+            {
+
+                var eventSource = (PictureBox)sender;
+                using (var bmpSource = new Bitmap(eventSource.Width, eventSource.Height))
+                {
+                    picSource.DrawToBitmap(bmpSource, new Rectangle(0, 0, eventSource.Width, eventSource.Height));
+                    pnlSourceColor.BackColor = bmpSource.GetPixel(e.X, e.Y);
+                    
+                }
+
+                ApplyFilter();
+            }
+        }
     }
 }
