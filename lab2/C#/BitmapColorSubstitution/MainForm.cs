@@ -14,6 +14,8 @@ namespace ColorReplacer
     {
         private readonly ColorSubstitutionFilter filterData = new ColorSubstitutionFilter();
 
+        private double gmul;
+
         public MainForm()
         {
             InitializeComponent();
@@ -28,7 +30,7 @@ namespace ColorReplacer
                 filterData.NewColor = pnlResultColor.BackColor;
 
                 picResult.Image = ((Bitmap)picSource.Image).ColorSubstitution(filterData);
-               
+
                 pnlFilter.Enabled = true;
                 btnSave.Enabled = true;
                 btnResultAsSource.Enabled = true;
@@ -37,7 +39,6 @@ namespace ColorReplacer
 
         private void PictureBoxMouseUpEventHandler(object sender, MouseEventArgs e)
         {
-            
         }
 
         private void trcThreshHold_ValueChanged(object sender, EventArgs e)
@@ -87,13 +88,12 @@ namespace ColorReplacer
             }
         }
 
-        private double gmul = 0;
         private void btnLoad_Click(object sender, EventArgs e)
         {
             var ofd = new OpenFileDialog();
             ofd.Title = "Specify a Source file name and file path";
             ofd.Filter = "Jpeg Images(*.jpg)|*.jpg|Png Images(*.png)|*.png|Bitmap Images(*.bmp)|*.bmp";
-            int maximal = 1000;
+            var maximal = 1000;
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 var streamReader = new StreamReader(ofd.FileName);
@@ -103,28 +103,29 @@ namespace ColorReplacer
                 picSource.Image = sourceBitmap.Format32bppArgbCopy();
                 if (picSource.Image.Width > maximal || picSource.Image.Height > maximal)
                 {
-                    double mul =(double) picSource.Image.Width/picSource.Image.Height;
+                    var mul = (double)picSource.Image.Width / picSource.Image.Height;
                     gmul = mul;
                     if (mul.CompareTo(1.0) >= 0)
                     {
                         picSource.Image = resizeImage(picSource.Image,
-                            new Size(maximal, (int) (maximal/mul)));
+                            new Size(maximal, (int)(maximal / mul)));
                     }
                     else
                     {
                         picSource.Image = resizeImage(picSource.Image,
-                            new Size((int) (maximal*mul), maximal));
+                            new Size((int)(maximal * mul), maximal));
                     }
                 }
                 ApplyFilter();
             }
         }
+
         public static Image resizeImage(Image imgToResize, Size size)
         {
-            return (Image)(new Bitmap(imgToResize, size));
+            return new Bitmap(imgToResize, size);
         }
 
-   
+
         private void btnSave_Click(object sender, EventArgs e)
         {
             if (picResult.Image != null)
@@ -165,14 +166,14 @@ namespace ColorReplacer
 
         private void hueTB_Scroll(object sender, EventArgs e)
         {
-            Color original = pnlResultColor.BackColor;
+            var original = pnlResultColor.BackColor;
 
             double hue;
             double saturation;
             double value;
             HSV.ColorToHSV(original, out hue, out saturation, out value);
 
-            Color copy = HSV.ColorFromHSV(hueTB.Value, saturation, value);
+            var copy = HSV.ColorFromHSV(hueTB.Value, saturation, value);
 
             pnlResultColor.BackColor = copy;
 
@@ -183,35 +184,31 @@ namespace ColorReplacer
         {
             if (sender is PictureBox)
             {
-
                 var eventSource = (PictureBox)sender;
                 using (var bmpSource = new Bitmap(eventSource.Width, eventSource.Height))
                 {
                     picResult.DrawToBitmap(bmpSource, new Rectangle(0, 0, eventSource.Width, eventSource.Height));
 
-                    Color color = bmpSource.GetPixel(e.X, e.Y);
+                    var color = bmpSource.GetPixel(e.X, e.Y);
                     picker2.BackColor = color;
-                    picker.Text = String.Format("R:{0:D3} G:{1:D3} B:{2:D3}", color.R, color.G, color.B);
+                    picker.Text = string.Format("R:{0:D3} G:{1:D3} B:{2:D3}", color.R, color.G, color.B);
                 }
             }
         }
 
         private void PictureBox2MouseUpEventHandler(object sender, MouseEventArgs e)
         {
-            
         }
 
         private void PictureBox1MouseUpEventHandler(object sender, MouseEventArgs e)
         {
             if (sender is PictureBox)
             {
-
                 var eventSource = (PictureBox)sender;
                 using (var bmpSource = new Bitmap(eventSource.Width, eventSource.Height))
                 {
                     picSource.DrawToBitmap(bmpSource, new Rectangle(0, 0, eventSource.Width, eventSource.Height));
                     pnlSourceColor.BackColor = bmpSource.GetPixel(e.X, e.Y);
-                    
                 }
 
                 ApplyFilter();
