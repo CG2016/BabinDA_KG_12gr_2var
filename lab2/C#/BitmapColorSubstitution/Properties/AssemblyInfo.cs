@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 // associated with an assembly.
 
 [assembly: AssemblyTitle("ColorReplacer")]
-[assembly: AssemblyDescription("ColorReplacer v1.2.3")]
+[assembly: AssemblyDescription("ColorReplacer v1.2.4")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("dbroot")]
 [assembly: AssemblyProduct("ColorReplacer")]
@@ -36,6 +36,6 @@ using System.Runtime.InteropServices;
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
 
-[assembly: AssemblyVersion("1.2.3.0")]
-[assembly: AssemblyFileVersion("1.2.3.0")]
+[assembly: AssemblyVersion("1.2.4.0")]
+[assembly: AssemblyFileVersion("1.2.4.0")]
 [assembly: NeutralResourcesLanguage("en")]
