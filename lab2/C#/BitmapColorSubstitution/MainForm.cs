@@ -24,10 +24,10 @@ namespace ColorReplacer
             if (picSource.Image != null)
             {
                 filterData.SourceColor = pnlSourceColor.BackColor;
-                filterData.ThresholdValue = (byte) (255.0f/100.0f*trcThreshHold.Value);
+                filterData.ThresholdValue = (byte)(255.0f / 100.0f * trcThreshHold.Value);
                 filterData.NewColor = pnlResultColor.BackColor;
 
-                picResult.Image = ((Bitmap) picSource.Image).ColorSubstitution(filterData);
+                picResult.Image = ((Bitmap)picSource.Image).ColorSubstitution(filterData);
 
                 pnlFilter.Enabled = true;
                 btnSave.Enabled = true;
@@ -39,7 +39,7 @@ namespace ColorReplacer
         {
             if (sender is PictureBox)
             {
-                var eventSource = (PictureBox) sender;
+                var eventSource = (PictureBox)sender;
 
                 using (var bmpSource = new Bitmap(eventSource.Width, eventSource.Height))
                 {
@@ -57,7 +57,7 @@ namespace ColorReplacer
 
         private void btnResultAsSource_Click(object sender, EventArgs e)
         {
-            picSource.Image = ((Bitmap) picResult.Image).Format32bppArgbCopy();
+            picSource.Image = ((Bitmap)picResult.Image).Format32bppArgbCopy();
         }
 
         private void ShowColorDialogButtonClickEventHandler(object sender, EventArgs e)
@@ -87,6 +87,11 @@ namespace ColorReplacer
                     {
                         pnlResultColor.BackColor = colorDlg.Color;
                     }
+                    double hue;
+                    double saturation;
+                    double value;
+                    HSV.ColorToHSV(pnlResultColor.BackColor, out hue, out saturation, out value);
+                    hueTB.Value = (int)hue;
 
                     ApplyFilter();
                 }
@@ -148,5 +153,22 @@ namespace ColorReplacer
 
             ApplyFilter();
         }
+
+        private void hueTB_Scroll(object sender, EventArgs e)
+        {
+            Color original = pnlResultColor.BackColor;
+
+            double hue;
+            double saturation;
+            double value;
+            HSV.ColorToHSV(original, out hue, out saturation, out value);
+
+            Color copy = HSV.ColorFromHSV(hueTB.Value, saturation, value);
+
+            pnlResultColor.BackColor = copy;
+
+            ApplyFilter();
+        }
+
     }
 }

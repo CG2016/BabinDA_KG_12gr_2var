@@ -45,10 +45,12 @@
             this.trcThreshHold = new System.Windows.Forms.TrackBar();
             this.lblColorFilter = new System.Windows.Forms.Label();
             this.btnResultAsSource = new System.Windows.Forms.Button();
+            this.hueTB = new System.Windows.Forms.TrackBar();
             ((System.ComponentModel.ISupportInitialize)(this.picSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picResult)).BeginInit();
             this.pnlFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trcThreshHold)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.hueTB)).BeginInit();
             this.SuspendLayout();
             // 
             // picSource
@@ -102,7 +104,7 @@
             // 
             // btnLoad
             // 
-            this.btnLoad.Location = new System.Drawing.Point(824, 355);
+            this.btnLoad.Location = new System.Drawing.Point(824, 367);
             this.btnLoad.Name = "btnLoad";
             this.btnLoad.Size = new System.Drawing.Size(149, 23);
             this.btnLoad.TabIndex = 4;
@@ -113,7 +115,7 @@
             // btnSave
             // 
             this.btnSave.Enabled = false;
-            this.btnSave.Location = new System.Drawing.Point(824, 384);
+            this.btnSave.Location = new System.Drawing.Point(824, 391);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(149, 23);
             this.btnSave.TabIndex = 5;
@@ -124,6 +126,7 @@
             // pnlFilter
             // 
             this.pnlFilter.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlFilter.Controls.Add(this.hueTB);
             this.pnlFilter.Controls.Add(this.btnSelectReplacementColor);
             this.pnlFilter.Controls.Add(this.pnlResultColor);
             this.pnlFilter.Controls.Add(this.lblReplacementColor);
@@ -135,7 +138,7 @@
             this.pnlFilter.Enabled = false;
             this.pnlFilter.Location = new System.Drawing.Point(824, 37);
             this.pnlFilter.Name = "pnlFilter";
-            this.pnlFilter.Size = new System.Drawing.Size(149, 300);
+            this.pnlFilter.Size = new System.Drawing.Size(149, 326);
             this.pnlFilter.TabIndex = 6;
             // 
             // btnSelectReplacementColor
@@ -232,7 +235,7 @@
             // btnResultAsSource
             // 
             this.btnResultAsSource.Enabled = false;
-            this.btnResultAsSource.Location = new System.Drawing.Point(824, 413);
+            this.btnResultAsSource.Location = new System.Drawing.Point(824, 414);
             this.btnResultAsSource.Name = "btnResultAsSource";
             this.btnResultAsSource.Size = new System.Drawing.Size(149, 23);
             this.btnResultAsSource.TabIndex = 9;
@@ -240,11 +243,22 @@
             this.btnResultAsSource.UseVisualStyleBackColor = true;
             this.btnResultAsSource.Click += new System.EventHandler(this.btnResultAsSource_Click);
             // 
+            // hueTB
+            // 
+            this.hueTB.AutoSize = false;
+            this.hueTB.Location = new System.Drawing.Point(3, 295);
+            this.hueTB.Maximum = 360;
+            this.hueTB.Name = "hueTB";
+            this.hueTB.Size = new System.Drawing.Size(141, 32);
+            this.hueTB.TabIndex = 10;
+            this.hueTB.TickFrequency = 10;
+            this.hueTB.Scroll += new System.EventHandler(this.hueTB_Scroll);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(984, 448);
+            this.ClientSize = new System.Drawing.Size(980, 446);
             this.Controls.Add(this.btnResultAsSource);
             this.Controls.Add(this.lblColorFilter);
             this.Controls.Add(this.pnlFilter);
@@ -265,6 +279,7 @@
             this.pnlFilter.ResumeLayout(false);
             this.pnlFilter.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trcThreshHold)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.hueTB)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -288,6 +303,7 @@
         private System.Windows.Forms.TrackBar trcThreshHold;
         private System.Windows.Forms.Label lblColorFilter;
         private System.Windows.Forms.Button btnResultAsSource;
+        private System.Windows.Forms.TrackBar hueTB;
     }
 }
 
