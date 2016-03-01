@@ -48,6 +48,7 @@
             this.btnResultAsSource = new System.Windows.Forms.Button();
             this.picker = new System.Windows.Forms.Label();
             this.picker2 = new System.Windows.Forms.PictureBox();
+            this.inLabcb = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.picSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picResult)).BeginInit();
             this.pnlFilter.SuspendLayout();
@@ -167,7 +168,7 @@
             // 
             // pnlResultColor
             // 
-            this.pnlResultColor.BackColor = System.Drawing.Color.White;
+            this.pnlResultColor.BackColor = System.Drawing.Color.YellowGreen;
             this.pnlResultColor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlResultColor.Location = new System.Drawing.Point(53, 180);
             this.pnlResultColor.Name = "pnlResultColor";
@@ -234,7 +235,6 @@
             this.trcThreshHold.TabIndex = 0;
             this.trcThreshHold.Value = 10;
             this.trcThreshHold.Scroll += new System.EventHandler(this.trcThreshHold_Scroll);
-            this.trcThreshHold.ValueChanged += new System.EventHandler(this.trcThreshHold_ValueChanged);
             // 
             // lblColorFilter
             // 
@@ -274,11 +274,24 @@
             this.picker2.TabIndex = 11;
             this.picker2.TabStop = false;
             // 
+            // inLabcb
+            // 
+            this.inLabcb.AutoSize = true;
+            this.inLabcb.Checked = true;
+            this.inLabcb.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.inLabcb.Location = new System.Drawing.Point(12, 446);
+            this.inLabcb.Name = "inLabcb";
+            this.inLabcb.Size = new System.Drawing.Size(57, 17);
+            this.inLabcb.TabIndex = 12;
+            this.inLabcb.Text = "in LAB";
+            this.inLabcb.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(980, 476);
+            this.Controls.Add(this.inLabcb);
             this.Controls.Add(this.picker2);
             this.Controls.Add(this.picker);
             this.Controls.Add(this.btnResultAsSource);
@@ -330,6 +343,7 @@
         private System.Windows.Forms.TrackBar hueTB;
         private System.Windows.Forms.Label picker;
         private System.Windows.Forms.PictureBox picker2;
+        private System.Windows.Forms.CheckBox inLabcb;
     }
 }
 

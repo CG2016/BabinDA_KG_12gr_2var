@@ -12,4 +12,3 @@ D:\Dropbox\source\3k\6s\kg\github_labs\lab2\C#\BitmapColorSubstitution\obj\x64\D
 D:\Dropbox\source\3k\6s\kg\github_labs\lab2\C#\BitmapColorSubstitution\obj\x64\Debug\ColorReplacer.csproj.GenerateResource.Cache
 D:\Dropbox\source\3k\6s\kg\github_labs\lab2\C#\BitmapColorSubstitution\obj\x64\Debug\ColorReplacer.exe
 D:\Dropbox\source\3k\6s\kg\github_labs\lab2\C#\BitmapColorSubstitution\obj\x64\Debug\ColorReplacer.pdb
-D:\Dropbox\source\3k\6s\kg\github_labs\lab2\C#\BitmapColorSubstitution\obj\x64\Debug\ColorReplacer.csprojResolveAssemblyReference.cache

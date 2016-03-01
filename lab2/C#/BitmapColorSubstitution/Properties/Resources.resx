@@ -119,6 +119,28 @@
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="sample" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\sample.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\Sample\sample.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MainForm_btnLoad_Click_Specify_a_Source_file_name_and_file_path" xml:space="preserve">
+    <value>Specify a Source file name and file path</value>
+  </data>
+  <data name="MainForm_btnLoad_Click_Jpeg_Images_All_files" xml:space="preserve">
+    <value>Jpeg Images(*.jpg)|*.jpg|Png Images(*.png)|*.png|Bitmap Images(*.bmp)|*.bmp|All files(*.*)|*.*</value>
+  </data>
+  <data name="MainForm_btnSave_Click_Specify_a_file_name_and_file_path" xml:space="preserve">
+    <value>Specify a file name and file path</value>
+  </data>
+  <data name="MainForm_btnSave_Click_Png_Images___png____png_Jpeg_Images___jpg____jpg_Bitmap_Images___bmp____bmp" xml:space="preserve">
+    <value>Png Images(*.png)|*.png|Jpeg Images(*.jpg)|*.jpg|Bitmap Images(*.bmp)|*.bmp</value>
+  </data>
+  <data name="MainForm_trcThreshHold_Scroll_" xml:space="preserve">
+    <value>Threshold 
+</value>
+  </data>
+  <data name="MainForm_trcThreshHold_Scroll__percent" xml:space="preserve">
+    <value>%</value>
+  </data>
+  <data name="sample1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Sample\sample.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

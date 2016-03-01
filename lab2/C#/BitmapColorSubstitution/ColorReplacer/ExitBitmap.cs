@@ -1,4 +1,4 @@
-﻿/*
+/*
 
 */
 
@@ -25,8 +25,8 @@ namespace ColorReplacer
 
             sourceBitmap.UnlockBits(sourceData);
 
-            byte sourceRed = 0, sourceGreen = 0, sourceBlue = 0, sourceAlpha = 0;
-            int resultRed = 0, resultGreen = 0, resultBlue = 0;
+            byte sourceRed, sourceGreen, sourceBlue, sourceAlpha;
+            int resultRed, resultGreen, resultBlue;
 
             var newRedValue = filterData.NewColor.R;
             var newGreenValue = filterData.NewColor.G;
@@ -103,7 +103,7 @@ namespace ColorReplacer
             return resultBitmap;
         }
 
-        public static Bitmap Format32bppArgbCopy(this Bitmap sourceBitmap)
+        public static Bitmap Format32BppArgbCopy(this Bitmap sourceBitmap)
         {
             var copyBitmap = new Bitmap(sourceBitmap.Width, sourceBitmap.Height, PixelFormat.Format32bppArgb);
 

@@ -52,6 +52,7 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -64,17 +65,38 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ExtBitmap.cs" />
-    <Compile Include="HSV.cs" />
-    <Compile Include="MainForm.cs">
+    <Compile Include="ColorConverter\Cie1976Comparison.cs" />
+    <Compile Include="ColorConverter\Cie94Comparison.cs" />
+    <Compile Include="ColorConverter\CieDe2000Comparison.cs" />
+    <Compile Include="ColorConverter\CmcComparison.cs" />
+    <Compile Include="ColorConverter\CmyConverter.cs" />
+    <Compile Include="ColorConverter\CmykConverter.cs" />
+    <Compile Include="ColorConverter\CmykProfileConverter.cs" />
+    <Compile Include="ColorConverter\ColorSpace.cs" />
+    <Compile Include="ColorConverter\ColorSpaces.cs" />
+    <Compile Include="ColorConverter\DoubleExtension.cs" />
+    <Compile Include="ColorConverter\HsbConverter.cs" />
+    <Compile Include="ColorConverter\HslConverter.cs" />
+    <Compile Include="ColorConverter\HsvConverter.cs" />
+    <Compile Include="ColorConverter\HunterLabConverter.cs" />
+    <Compile Include="ColorConverter\IColorSpaceComparison.cs" />
+    <Compile Include="ColorConverter\LabConverter.cs" />
+    <Compile Include="ColorConverter\LchConverter.cs" />
+    <Compile Include="ColorConverter\LuvConverter.cs" />
+    <Compile Include="ColorConverter\RgbConverter.cs" />
+    <Compile Include="ColorConverter\XyzConverter.cs" />
+    <Compile Include="ColorConverter\YxyConverter.cs" />
+    <Compile Include="ColorReplacer\ExitBitmap.cs" />
+    <Compile Include="ColorReplacer\HsvCM.cs" />
+    <Compile Include="GUI\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForm.Designer.cs">
+    <Compile Include="GUI\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="MainForm.resx">
+    <EmbeddedResource Include="GUI\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -98,7 +120,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="sample.jpg" />
+    <None Include="Sample\sample.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sample2.bmp" />
+    <Content Include="Sample\sample.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

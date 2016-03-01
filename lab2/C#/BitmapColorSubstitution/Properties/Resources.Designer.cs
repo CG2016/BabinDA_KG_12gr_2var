@@ -61,11 +61,77 @@ namespace ColorReplacer.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Jpeg Images(*.jpg)|*.jpg|Png Images(*.png)|*.png|Bitmap Images(*.bmp)|*.bmp|All files(*.*)|*.*.
+        /// </summary>
+        internal static string MainForm_btnLoad_Click_Jpeg_Images_All_files {
+            get {
+                return ResourceManager.GetString("MainForm_btnLoad_Click_Jpeg_Images_All_files", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Specify a Source file name and file path.
+        /// </summary>
+        internal static string MainForm_btnLoad_Click_Specify_a_Source_file_name_and_file_path {
+            get {
+                return ResourceManager.GetString("MainForm_btnLoad_Click_Specify_a_Source_file_name_and_file_path", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Png Images(*.png)|*.png|Jpeg Images(*.jpg)|*.jpg|Bitmap Images(*.bmp)|*.bmp.
+        /// </summary>
+        internal static string MainForm_btnSave_Click_Png_Images___png____png_Jpeg_Images___jpg____jpg_Bitmap_Images___bmp____bmp {
+            get {
+                return ResourceManager.GetString("MainForm_btnSave_Click_Png_Images___png____png_Jpeg_Images___jpg____jpg_Bitmap_Im" +
+                        "ages___bmp____bmp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Specify a file name and file path.
+        /// </summary>
+        internal static string MainForm_btnSave_Click_Specify_a_file_name_and_file_path {
+            get {
+                return ResourceManager.GetString("MainForm_btnSave_Click_Specify_a_file_name_and_file_path", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Threshold 
+        ///.
+        /// </summary>
+        internal static string MainForm_trcThreshHold_Scroll_ {
+            get {
+                return ResourceManager.GetString("MainForm_trcThreshHold_Scroll_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на %.
+        /// </summary>
+        internal static string MainForm_trcThreshHold_Scroll__percent {
+            get {
+                return ResourceManager.GetString("MainForm_trcThreshHold_Scroll__percent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap sample {
             get {
                 object obj = ResourceManager.GetObject("sample", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap sample1 {
+            get {
+                object obj = ResourceManager.GetObject("sample1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
