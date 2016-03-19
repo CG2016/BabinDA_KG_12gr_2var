@@ -9,6 +9,7 @@ using System.IO;
 using System.Windows.Forms;
 using ColorReplacer.Properties;
 
+
 namespace ColorReplacer
 {
     public partial class MainForm : Form
@@ -29,6 +30,7 @@ namespace ColorReplacer
         public MainForm()
         {
             InitializeComponent();
+
         }
 
         private void ApplyFilter()
@@ -37,14 +39,16 @@ namespace ColorReplacer
             {
                 if (inLabcb.Checked)
                 {
+                
+                   
                     picResult.Image = ApplyFilterLab(picSource.Image);
                 }
                 else
                 {
                     _filterData.SourceColor = pnlSourceColor.BackColor;
-                    _filterData.ThresholdValue = (byte) (255.0f/100.0f*trcThreshHold.Value);
+                    _filterData.ThresholdValue = (byte)(255.0f / 100.0f * trcThreshHold.Value);
                     _filterData.NewColor = pnlResultColor.BackColor;
-                    picResult.Image = ((Bitmap) picSource.Image).ColorSubstitution(_filterData);
+                    picResult.Image = ((Bitmap)picSource.Image).ColorSubstitution(_filterData);
                 }
                 pnlFilter.Enabled = true;
                 btnSave.Enabled = true;
@@ -52,57 +56,60 @@ namespace ColorReplacer
             }
         }
 
-
+      
         private Image ApplyFilterLab(Image image)
         {
-            _colBefore = pnlSourceColor.BackColor;
-            _colAfter = pnlResultColor.BackColor;
-            _treshold = trcThreshHold.Value;
-            _labBefore = new Rgb {R = _colBefore.R, G = _colBefore.G, B = _colBefore.B}.To<Lab>();
-            _labAfter = new Rgb {R = _colAfter.R, G = _colAfter.G, B = _colAfter.B}.To<Lab>();
+            
+                _colBefore = pnlSourceColor.BackColor;
+                _colAfter = pnlResultColor.BackColor;
+                _treshold = trcThreshHold.Value;
+                _labBefore = new Rgb { R = _colBefore.R, G = _colBefore.G, B = _colBefore.B }.To<Lab>();
+                _labAfter = new Rgb { R = _colAfter.R, G = _colAfter.G, B = _colAfter.B }.To<Lab>();
 
 
-            var img = new Bitmap(image);
-            for (var i = 0; i < img.Width; i++)
-            {
-                for (var j = 0; j < img.Height; j++)
+                var img = new Bitmap(image);
+                for (var i = 0; i < img.Width; i++)
                 {
-                    _pixel = img.GetPixel(i, j);
-                    _labPixel = (_rgbPixel = new Rgb {R = _pixel.R, G = _pixel.G, B = _pixel.B}).To<Lab>();
-
-                    if (Max_range(_labPixel, _labBefore, _treshold, ref _labRange))
+                    for (var j = 0; j < img.Height; j++)
                     {
-                        _labPixel.L = _labAfter.L + _labRange.L;
-                        _labPixel.A = _labAfter.A + _labRange.A;
-                        _labPixel.B = _labAfter.B + _labRange.B;
-                        _rgbPixel = _labPixel.To<Rgb>();
+                        _pixel = img.GetPixel(i, j);
+                        _labPixel = (_rgbPixel = new Rgb { R = _pixel.R, G = _pixel.G, B = _pixel.B }).To<Lab>();
 
-                        if (_rgbPixel.R < 0)
+                        if (Max_range(_labPixel, _labBefore, _treshold, ref _labRange))
                         {
-                            _rgbPixel.R = 0;
-                        }
-                        if (_rgbPixel.R > 255)
-                        {
-                            _rgbPixel.R = 255;
-                        }
-                        if (_rgbPixel.G < 0)
-                        {
-                            _rgbPixel.G = 0;
-                        }
-                        if (_rgbPixel.G > 255)
-                            _rgbPixel.G = 255;
-                        if (_rgbPixel.B < 0)
-                        {
-                            _rgbPixel.B = 0;
-                        }
-                        if (_rgbPixel.B > 255)
-                            _rgbPixel.B = 255;
+                            _labPixel.L = _labAfter.L + _labRange.L;
+                            _labPixel.A = _labAfter.A + _labRange.A;
+                            _labPixel.B = _labAfter.B + _labRange.B;
+                            _rgbPixel = _labPixel.To<Rgb>();
 
-                        img.SetPixel(i, j, Color.FromArgb((int) _rgbPixel.R, (int) _rgbPixel.G, (int) _rgbPixel.B));
+                            if (_rgbPixel.R < 0)
+                            {
+                                _rgbPixel.R = 0;
+                            }
+                            if (_rgbPixel.R > 255)
+                            {
+                                _rgbPixel.R = 255;
+                            }
+                            if (_rgbPixel.G < 0)
+                            {
+                                _rgbPixel.G = 0;
+                            }
+                            if (_rgbPixel.G > 255)
+                                _rgbPixel.G = 255;
+                            if (_rgbPixel.B < 0)
+                            {
+                                _rgbPixel.B = 0;
+                            }
+                            if (_rgbPixel.B > 255)
+                                _rgbPixel.B = 255;
+
+                            img.SetPixel(i, j, Color.FromArgb((int)_rgbPixel.R, (int)_rgbPixel.G, (int)_rgbPixel.B));
+                        }
                     }
                 }
-            }
-            return img;
+                return img;
+            
+
         }
 
 
@@ -122,15 +129,15 @@ namespace ColorReplacer
                 labRange.B = labPixel.B - labBefore.B;
             }
 
-            var evklidRange = Math.Sqrt((labPixel.L - labBefore.L)*(labPixel.L - labBefore.L) +
-                                        (labPixel.A - labBefore.A)*(labPixel.A - labBefore.A) +
-                                        (labPixel.B - labBefore.B)*(labPixel.B - labBefore.B));
+            var evklidRange = Math.Sqrt((labPixel.L - labBefore.L) * (labPixel.L - labBefore.L) +
+                                        (labPixel.A - labBefore.A) * (labPixel.A - labBefore.A) +
+                                        (labPixel.B - labBefore.B) * (labPixel.B - labBefore.B));
             return evklidRange < treshold;
         }
 
         private void btnResultAsSource_Click(object sender, EventArgs e)
         {
-            picSource.Image = ((Bitmap) picResult.Image).Format32BppArgbCopy();
+            picSource.Image = ((Bitmap)picResult.Image).Format32BppArgbCopy();
         }
 
         private void ShowColorDialogButtonClickEventHandler(object sender, EventArgs e)
@@ -164,7 +171,7 @@ namespace ColorReplacer
                     double saturation;
                     double value;
                     HsvCM.ColorToHsv(pnlResultColor.BackColor, out hue, out saturation, out value);
-                    hueTB.Value = (int) hue;
+                    hueTB.Value = (int)hue;
 
                     ApplyFilter();
                 }
@@ -186,17 +193,17 @@ namespace ColorReplacer
                 picSource.Image = sourceBitmap.Format32BppArgbCopy();
                 if (picSource.Image.Width > maximal || picSource.Image.Height > maximal)
                 {
-                    var mul = (double) picSource.Image.Width/picSource.Image.Height;
+                    var mul = (double)picSource.Image.Width / picSource.Image.Height;
 
                     if (mul.CompareTo(1.0) >= 0)
                     {
                         picSource.Image = ResizeImage(picSource.Image,
-                            new Size(maximal, (int) (maximal/mul)));
+                            new Size(maximal, (int)(maximal / mul)));
                     }
                     else
                     {
                         picSource.Image = ResizeImage(picSource.Image,
-                            new Size((int) (maximal*mul), maximal));
+                            new Size((int)(maximal * mul), maximal));
                     }
                 }
                 ApplyFilter();
@@ -273,7 +280,7 @@ namespace ColorReplacer
         {
             if (sender is PictureBox)
             {
-                var eventSource = (PictureBox) sender;
+                var eventSource = (PictureBox)sender;
                 using (var bmpSource = new Bitmap(eventSource.Width, eventSource.Height))
                 {
                     picResult.DrawToBitmap(bmpSource, new Rectangle(0, 0, eventSource.Width, eventSource.Height));
@@ -290,7 +297,7 @@ namespace ColorReplacer
         {
             if (sender is PictureBox)
             {
-                var eventSource = (PictureBox) sender;
+                var eventSource = (PictureBox)sender;
                 using (var bmpSource = new Bitmap(eventSource.Width, eventSource.Height))
                 {
                     picSource.DrawToBitmap(bmpSource, new Rectangle(0, 0, eventSource.Width, eventSource.Height));

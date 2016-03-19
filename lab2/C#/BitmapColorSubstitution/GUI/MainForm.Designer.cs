@@ -290,7 +290,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(980, 476);
+            this.ClientSize = new System.Drawing.Size(980, 484);
             this.Controls.Add(this.inLabcb);
             this.Controls.Add(this.picker2);
             this.Controls.Add(this.picker);
