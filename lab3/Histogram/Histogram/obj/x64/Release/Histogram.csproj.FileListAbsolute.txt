@@ -2,7 +2,6 @@ D:\Dropbox\source\3k\6s\kg\github_labs\lab3\Histogram\Histogram\bin\x64\Release\
 D:\Dropbox\source\3k\6s\kg\github_labs\lab3\Histogram\Histogram\bin\x64\Release\Magick.NET-Q8-x64.Native.dll
 D:\Dropbox\source\3k\6s\kg\github_labs\lab3\Histogram\Histogram\bin\x64\Release\Histogram.exe
 D:\Dropbox\source\3k\6s\kg\github_labs\lab3\Histogram\Histogram\bin\x64\Release\Histogram.pdb
-D:\Dropbox\source\3k\6s\kg\github_labs\lab3\Histogram\Histogram\bin\x64\Release\BigInteger.dll
 D:\Dropbox\source\3k\6s\kg\github_labs\lab3\Histogram\Histogram\bin\x64\Release\Magick.NET-Q8-x64.dll
 D:\Dropbox\source\3k\6s\kg\github_labs\lab3\Histogram\Histogram\bin\x64\Release\ZedGraph.dll
 D:\Dropbox\source\3k\6s\kg\github_labs\lab3\Histogram\Histogram\bin\x64\Release\ZedGraph.Web.dll

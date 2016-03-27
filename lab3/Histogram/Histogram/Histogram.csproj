@@ -55,10 +55,6 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BigInteger, Version=1.4.5574.38047, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\BigInteger.1.0.4\lib\BigInteger.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Magick.NET-Q8-x64, Version=7.0.0.0, Culture=neutral, PublicKeyToken=2004825badfa91ec, processorArchitecture=AMD64">
       <HintPath>..\packages\Magick.NET-Q8-x64.7.0.0.0103\lib\net40-client\Magick.NET-Q8-x64.dll</HintPath>
       <Private>True</Private>
