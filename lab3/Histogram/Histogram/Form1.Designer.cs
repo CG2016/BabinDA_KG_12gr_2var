@@ -35,6 +35,7 @@
             this.loadButton = new System.Windows.Forms.Button();
             this.isParallelCB = new System.Windows.Forms.CheckBox();
             this.isSmooth = new System.Windows.Forms.CheckBox();
+            this.lineBarCB = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.myPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -106,11 +107,25 @@
             this.isSmooth.UseVisualStyleBackColor = true;
             this.isSmooth.CheckedChanged += new System.EventHandler(this.isSmooth_CheckedChanged);
             // 
+            // lineBarCB
+            // 
+            this.lineBarCB.AutoSize = true;
+            this.lineBarCB.Checked = true;
+            this.lineBarCB.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.lineBarCB.Location = new System.Drawing.Point(224, 608);
+            this.lineBarCB.Name = "lineBarCB";
+            this.lineBarCB.Size = new System.Drawing.Size(65, 17);
+            this.lineBarCB.TabIndex = 5;
+            this.lineBarCB.Text = "line | bar";
+            this.lineBarCB.UseVisualStyleBackColor = true;
+            this.lineBarCB.CheckedChanged += new System.EventHandler(this.lineBarCB_CheckedChanged);
+            // 
             // Histogram
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1458, 639);
+            this.Controls.Add(this.lineBarCB);
             this.Controls.Add(this.isSmooth);
             this.Controls.Add(this.isParallelCB);
             this.Controls.Add(this.loadButton);
@@ -132,6 +147,7 @@
         private System.Windows.Forms.Button loadButton;
         private System.Windows.Forms.CheckBox isParallelCB;
         private System.Windows.Forms.CheckBox isSmooth;
+        private System.Windows.Forms.CheckBox lineBarCB;
     }
 }
 

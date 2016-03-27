@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // связанные со сборкой.
 
 [assembly: AssemblyTitle("Histogram")]
-[assembly: AssemblyDescription("histogram with parallel processing")]
+[assembly: AssemblyDescription("histogram with parallel processing and liminosity and line\bar")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("dbroot")]
 [assembly: AssemblyProduct("Histogram")]
@@ -35,5 +35,5 @@ using System.Runtime.InteropServices;
 // используя "*", как показано ниже:
 // [assembly: AssemblyVersion("1.0.*")]
 
-[assembly: AssemblyVersion("1.3.1.0")]
-[assembly: AssemblyFileVersion("1.3.1.0")]
+[assembly: AssemblyVersion("1.3.2.0")]
+[assembly: AssemblyFileVersion("1.3.2.0")]
