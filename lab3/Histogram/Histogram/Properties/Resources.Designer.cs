@@ -59,5 +59,14 @@ namespace Histogram.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Image Files(*.BMP;*.JPG;*.PNG;*.PCX;*.TIF)|*.BMP;*.JPG;*.JPEG;*.PNG;*.PCX;*.TIF|All files (*.*)|*.*.
+        /// </summary>
+        internal static string Histogram_LoadImage_Image_Files {
+            get {
+                return ResourceManager.GetString("Histogram_LoadImage_Image_Files", resourceCulture);
+            }
+        }
     }
 }

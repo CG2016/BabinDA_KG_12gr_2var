@@ -114,4 +114,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Histogram_LoadImage_Image_Files" xml:space="preserve">
+    <value>Image Files(*.BMP;*.JPG;*.PNG;*.PCX;*.TIF)|*.BMP;*.JPG;*.JPEG;*.PNG;*.PCX;*.TIF|All files (*.*)|*.*</value>
+  </data>
 </root>

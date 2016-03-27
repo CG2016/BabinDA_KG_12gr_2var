@@ -29,14 +29,19 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Histogram));
             this.myPictureBox = new System.Windows.Forms.PictureBox();
             this.myZedGraphControl = new ZedGraph.ZedGraphControl();
             this.loadButton = new System.Windows.Forms.Button();
+            this.isParallelCB = new System.Windows.Forms.CheckBox();
+            this.isSmooth = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.myPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // myPictureBox
             // 
+            this.myPictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.myPictureBox.Location = new System.Drawing.Point(12, 12);
             this.myPictureBox.Name = "myPictureBox";
             this.myPictureBox.Size = new System.Drawing.Size(424, 586);
@@ -47,6 +52,9 @@
             // 
             // myZedGraphControl
             // 
+            this.myZedGraphControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.myZedGraphControl.Location = new System.Drawing.Point(442, 12);
             this.myZedGraphControl.Name = "myZedGraphControl";
             this.myZedGraphControl.ScrollGrace = 0D;
@@ -61,6 +69,7 @@
             // 
             // loadButton
             // 
+            this.loadButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.loadButton.Location = new System.Drawing.Point(12, 604);
             this.loadButton.Name = "loadButton";
             this.loadButton.Size = new System.Drawing.Size(75, 23);
@@ -69,18 +78,50 @@
             this.loadButton.UseVisualStyleBackColor = true;
             this.loadButton.Click += new System.EventHandler(this.loadButton_Click);
             // 
+            // isParallelCB
+            // 
+            this.isParallelCB.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.isParallelCB.AutoSize = true;
+            this.isParallelCB.Checked = true;
+            this.isParallelCB.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.isParallelCB.Location = new System.Drawing.Point(93, 608);
+            this.isParallelCB.Name = "isParallelCB";
+            this.isParallelCB.Size = new System.Drawing.Size(59, 17);
+            this.isParallelCB.TabIndex = 3;
+            this.isParallelCB.Text = "parallel";
+            this.isParallelCB.UseVisualStyleBackColor = true;
+            this.isParallelCB.CheckedChanged += new System.EventHandler(this.isParallelCB_CheckedChanged);
+            // 
+            // isSmooth
+            // 
+            this.isSmooth.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.isSmooth.AutoSize = true;
+            this.isSmooth.Checked = true;
+            this.isSmooth.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.isSmooth.Location = new System.Drawing.Point(158, 608);
+            this.isSmooth.Name = "isSmooth";
+            this.isSmooth.Size = new System.Drawing.Size(60, 17);
+            this.isSmooth.TabIndex = 4;
+            this.isSmooth.Text = "smooth";
+            this.isSmooth.UseVisualStyleBackColor = true;
+            this.isSmooth.CheckedChanged += new System.EventHandler(this.isSmooth_CheckedChanged);
+            // 
             // Histogram
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1458, 639);
+            this.Controls.Add(this.isSmooth);
+            this.Controls.Add(this.isParallelCB);
             this.Controls.Add(this.loadButton);
             this.Controls.Add(this.myZedGraphControl);
             this.Controls.Add(this.myPictureBox);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Histogram";
-            this.Text = "Form1";
+            this.Text = "Histogram";
             ((System.ComponentModel.ISupportInitialize)(this.myPictureBox)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -89,6 +130,8 @@
         private System.Windows.Forms.PictureBox myPictureBox;
         private ZedGraph.ZedGraphControl myZedGraphControl;
         private System.Windows.Forms.Button loadButton;
+        private System.Windows.Forms.CheckBox isParallelCB;
+        private System.Windows.Forms.CheckBox isSmooth;
     }
 }
 
