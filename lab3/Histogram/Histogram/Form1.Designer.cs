@@ -109,6 +109,7 @@
             // 
             // lineBarCB
             // 
+            this.lineBarCB.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lineBarCB.AutoSize = true;
             this.lineBarCB.Checked = true;
             this.lineBarCB.CheckState = System.Windows.Forms.CheckState.Checked;
