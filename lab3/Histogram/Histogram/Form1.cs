@@ -75,14 +75,14 @@ namespace Histogram
                     for (var j = 0; j < bitmap.Height; j++)
                     {
                         var pixel = bitmap.GetPixel(i, j);
-                        lum[(int) pixel.GetBrightness()*255] += 1;
+                        lum[(int) (pixel.GetBrightness()*255)] += 1;
                         red[pixel.R]+=1;
                         green[pixel.G]+=1;
                         blue[pixel.B]+=1;
                         redTotal += pixel.R;
                         greenTotal += pixel.G;
                         blueTotal += pixel.B;
-                        lumTotal += (int) pixel.GetBrightness()*255;
+                        lumTotal += (int) (pixel.GetBrightness()*255);
                     }
                 }
             }

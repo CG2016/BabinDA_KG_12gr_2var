@@ -31,7 +31,6 @@ D:\Dropbox\source\3k\6s\kg\github_labs\lab3\Histogram\Histogram\obj\x64\Debug\Hi
 D:\Dropbox\source\3k\6s\kg\github_labs\lab3\Histogram\Histogram\obj\x64\Debug\Histogram.pdb
 D:\Dropbox\source\3k\6s\kg\github_labs\lab3\Histogram\Histogram\bin\x64\Debug\Histogram.exe
 D:\Dropbox\source\3k\6s\kg\github_labs\lab3\Histogram\Histogram\bin\x64\Debug\Histogram.pdb
-D:\Dropbox\source\3k\6s\kg\github_labs\lab3\Histogram\Histogram\bin\x64\Debug\BigInteger.dll
 D:\Dropbox\source\3k\6s\kg\github_labs\lab3\Histogram\Histogram\bin\x64\Debug\ZedGraph.dll
 D:\Dropbox\source\3k\6s\kg\github_labs\lab3\Histogram\Histogram\bin\x64\Debug\ZedGraph.Web.dll
 D:\Dropbox\source\3k\6s\kg\github_labs\lab3\Histogram\Histogram\bin\x64\Debug\ZedGraph.xml
