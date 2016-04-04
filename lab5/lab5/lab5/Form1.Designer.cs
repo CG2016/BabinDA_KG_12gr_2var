@@ -66,7 +66,7 @@
             // x1TB
             // 
             this.x1TB.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.x1TB.Location = new System.Drawing.Point(580, 132);
+            this.x1TB.Location = new System.Drawing.Point(580, 160);
             this.x1TB.Name = "x1TB";
             this.x1TB.Size = new System.Drawing.Size(121, 20);
             this.x1TB.TabIndex = 1;
@@ -76,7 +76,7 @@
             // y1TB
             // 
             this.y1TB.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.y1TB.Location = new System.Drawing.Point(580, 158);
+            this.y1TB.Location = new System.Drawing.Point(580, 186);
             this.y1TB.Name = "y1TB";
             this.y1TB.Size = new System.Drawing.Size(121, 20);
             this.y1TB.TabIndex = 2;
@@ -87,7 +87,7 @@
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(518, 135);
+            this.label1.Location = new System.Drawing.Point(518, 163);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(34, 13);
             this.label1.TabIndex = 4;
@@ -97,7 +97,7 @@
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(518, 161);
+            this.label2.Location = new System.Drawing.Point(518, 189);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(34, 13);
             this.label2.TabIndex = 5;
@@ -113,10 +113,11 @@
             "DDA",
             "Simple iteration",
             "WuLine",
-            "WuCircle"});
+            "WuCircle",
+            "BCircleV2"});
             this.checkedListBox1.Location = new System.Drawing.Point(518, 12);
             this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(183, 94);
+            this.checkedListBox1.Size = new System.Drawing.Size(183, 109);
             this.checkedListBox1.TabIndex = 7;
             this.checkedListBox1.SelectedValueChanged += new System.EventHandler(this.checkedListBox1_SelectedValueChanged);
             // 
@@ -124,7 +125,7 @@
             // 
             this.isFromNullCB.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.isFromNullCB.AutoSize = true;
-            this.isFromNullCB.Location = new System.Drawing.Point(518, 109);
+            this.isFromNullCB.Location = new System.Drawing.Point(518, 137);
             this.isFromNullCB.Name = "isFromNullCB";
             this.isFromNullCB.Size = new System.Drawing.Size(67, 17);
             this.isFromNullCB.TabIndex = 12;
@@ -136,7 +137,7 @@
             // 
             this.trackBar1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.trackBar1.AutoSize = false;
-            this.trackBar1.Location = new System.Drawing.Point(580, 184);
+            this.trackBar1.Location = new System.Drawing.Point(580, 212);
             this.trackBar1.Name = "trackBar1";
             this.trackBar1.Size = new System.Drawing.Size(121, 28);
             this.trackBar1.TabIndex = 13;
@@ -146,7 +147,7 @@
             // 
             this.trackBar2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.trackBar2.AutoSize = false;
-            this.trackBar2.Location = new System.Drawing.Point(580, 218);
+            this.trackBar2.Location = new System.Drawing.Point(580, 246);
             this.trackBar2.Name = "trackBar2";
             this.trackBar2.Size = new System.Drawing.Size(121, 28);
             this.trackBar2.TabIndex = 14;
@@ -156,7 +157,7 @@
             // 
             this.trackBar3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.trackBar3.AutoSize = false;
-            this.trackBar3.Location = new System.Drawing.Point(580, 252);
+            this.trackBar3.Location = new System.Drawing.Point(580, 280);
             this.trackBar3.Name = "trackBar3";
             this.trackBar3.Size = new System.Drawing.Size(121, 28);
             this.trackBar3.TabIndex = 15;
@@ -166,7 +167,7 @@
             // 
             this.trackBar4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.trackBar4.AutoSize = false;
-            this.trackBar4.Location = new System.Drawing.Point(580, 286);
+            this.trackBar4.Location = new System.Drawing.Point(580, 314);
             this.trackBar4.Name = "trackBar4";
             this.trackBar4.Size = new System.Drawing.Size(121, 28);
             this.trackBar4.TabIndex = 16;
@@ -176,7 +177,7 @@
             // 
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(518, 224);
+            this.label5.Location = new System.Drawing.Point(518, 252);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(18, 13);
             this.label5.TabIndex = 20;
@@ -186,7 +187,7 @@
             // 
             this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(518, 190);
+            this.label6.Location = new System.Drawing.Point(518, 218);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(18, 13);
             this.label6.TabIndex = 19;
@@ -196,7 +197,7 @@
             // 
             this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(518, 292);
+            this.label7.Location = new System.Drawing.Point(518, 320);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(18, 13);
             this.label7.TabIndex = 18;
@@ -206,7 +207,7 @@
             // 
             this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(518, 258);
+            this.label8.Location = new System.Drawing.Point(518, 286);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(18, 13);
             this.label8.TabIndex = 17;
