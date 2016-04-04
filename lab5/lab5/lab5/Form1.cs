@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 using lab5.Properties;
+using ZedGraph;
 
 namespace lab5
 {
@@ -14,6 +16,7 @@ namespace lab5
             InitTrackbars();
         }
 
+        private static List<Point> dataList = new List<Point>();
         private void InitTrackbars()
         {
             if (x1TB.Text.Length == 0)
@@ -79,8 +82,12 @@ namespace lab5
         private static bool PutPixel(Bitmap image, int x0, int y0)
         {
             if ((x0 >= 0 && y0 >= 0) || (x0 < image.Width && y0 < image.Height))
+            {
                 image.SetPixel(x0, y0, Color.Black);
-            return true;
+                        dataList.Add(new Point(x0, y0));
+        }
+
+    return true;
         }
 
         public static void Bresenham4Line(Bitmap image, int x, int y)
@@ -247,7 +254,9 @@ namespace lab5
                 g.InterpolationMode = InterpolationMode.NearestNeighbor;
                 g.DrawImage(new Bitmap(x + 1, y + 1), 0, 0, x, y);
             }
+            
             bitmap.RotateFlip(RotateFlipType.RotateNoneFlipY);
+
             pictureBox1.Image = ResizeImage(bitmap, pictureBox1.Size);
         }
 
@@ -649,22 +658,73 @@ namespace lab5
 
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
+            dataList.Clear();
             ShowLine();
+            DrawGraph();
+            
+            
         }
 
         private void trackBar2_Scroll(object sender, EventArgs e)
         {
+            dataList.Clear();
             ShowLine();
+            DrawGraph();
         }
 
         private void trackBar3_Scroll(object sender, EventArgs e)
         {
+            dataList.Clear();
             ShowLine();
+            DrawGraph();
         }
 
         private void trackBar4_Scroll(object sender, EventArgs e)
         {
+            dataList.Clear();
             ShowLine();
+            DrawGraph();
+        }
+        private void DrawGraph()
+        {
+            // Получим панель для рисования
+            GraphPane pane = zedGraphControl1.GraphPane;
+
+            // Очистим список кривых на тот случай, если до этого сигналы уже были нарисованы
+            pane.CurveList.Clear();
+
+            // Создадим список точек
+            PointPairList list = new PointPairList();
+
+          
+
+            // Заполняем список точек
+            foreach (Point point in dataList)
+            {
+                list.Add(point.X,point.Y);
+            }
+            
+            // Создадим кривую с названием "Sinc", 
+            // которая будет рисоваться голубым цветом (Color.Blue),
+            // Опорные точки выделяться не будут (SymbolType.None)
+            LineItem myCurve = pane.AddCurve("Sinc", list, Color.Blue, SymbolType.Square);
+            myCurve.Line.IsVisible = false;
+            myCurve.Symbol.Fill.Color = Color.Blue;
+
+            // !!!
+            // Тип заполнения - сплошная заливка
+            myCurve.Symbol.Fill.Type = FillType.Solid;
+            
+            // !!!
+            // Размер ромбиков
+            myCurve.Symbol.Size = 5;
+            // Вызываем метод AxisChange (), чтобы обновить данные об осях. 
+            // В противном случае на рисунке будет показана только часть графика, 
+            // которая умещается в интервалы по осям, установленные по умолчанию
+            zedGraphControl1.AxisChange();
+
+            // Обновляем график
+            zedGraphControl1.Invalidate();
         }
     }
 }

@@ -81,7 +81,7 @@ namespace lab4
                 {
                     using (MagickImage magickImage = new MagickImage(file))
                     {
-                        magickImage.Format = MagickFormat.Bmp;
+                        magickImage.Format = MagickFormat.Jpg;
                         return magickImage.ToBitmap();
                     }
                 }
