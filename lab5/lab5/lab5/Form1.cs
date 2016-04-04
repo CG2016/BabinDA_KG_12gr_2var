@@ -75,6 +75,141 @@ namespace lab5
         {
             Line(image, 0, 0, x, y);
         }
+        private static int IPart(float x)
+        {
+            return (int)x;
+        }
+        private static float FPart(float x)
+        {
+            while (x >= 0)
+                x--;
+            x++;
+            return x;
+        }
+        public static void DrawWuLine(Bitmap image, int x0, int y0, int x1, int y1)
+        {
+            //Вычисление изменения координат
+            int dx = (x1 > x0) ? (x1 - x0) : (x0 - x1);
+            int dy = (y1 > y0) ? (y1 - y0) : (y0 - y1);
+            //Если линия параллельна одной из осей, рисуем обычную линию - заполняем все пикселы в ряд
+            if (dx == 0 || dy == 0)
+            {
+                Line(image, x0, y0, x1, y1);
+                return;
+            }
+
+            //Для Х-линии (коэффициент наклона < 1)
+            if (dy < dx)
+            {
+                //Первая точка должна иметь меньшую координату Х
+                if (x1 < x0)
+                {
+                    x1 += x0; x0 = x1 - x0; x1 -= x0;
+                    y1 += y0; y0 = y1 - y0; y1 -= y0;
+                }
+                //Относительное изменение координаты Y
+                float grad = (float)dy / dx;
+                //Промежуточная переменная для Y
+                float intery = y0 + grad;
+                //Первая точка
+                //PutPixel(image, x0, y0);
+
+                for (int x = x0 + 1; x < x1; x++)
+                {
+                    //Верхняя точка
+                    PutPixel(image, x, IPart(intery), (int)(255 - FPart(intery) * 255));
+                    //Нижняя точка
+                    PutPixel(image, x, IPart(intery) + 1, (int)(FPart(intery) * 255));
+                    //Изменение координаты Y
+                    intery += grad;
+                }
+                //Последняя точка
+              //  PutPixel(image, x1, y1);
+            }
+            //Для Y-линии (коэффициент наклона > 1)
+            else
+            {
+                //Первая точка должна иметь меньшую координату Y
+                if (y1 < y0)
+                {
+                    x1 += x0; x0 = x1 - x0; x1 -= x0;
+                    y1 += y0; y0 = y1 - y0; y1 -= y0;
+                }
+                //Относительное изменение координаты X
+                float grad = (float)dx / dy;
+                //Промежуточная переменная для X
+                float interx = x0 + grad;
+                //Первая точка
+               // PutPixel(image, x0, y0);
+
+                for (int y = y0 + 1; y < y1; y++)
+                {
+                    //Верхняя точка
+                    PutPixel(image, IPart(interx), y, 255 - (int)(FPart(interx) * 255));
+                    //Нижняя точка
+                    PutPixel(image, IPart(interx) + 1, y, (int)(FPart(interx) * 255));
+                    //Изменение координаты X
+                    interx += grad;
+                }
+                //Последняя точка
+               // PutPixel(image, x1, y1);
+            }
+        }
+       
+        public static void DrawWuCircle(Bitmap image, int radius)
+        {
+            int _x = radius+5, _y = radius+5;
+            //Установка пикселов, лежащих на осях системы координат с началом в центре
+            PutPixel(image, _x + radius, _y);
+            PutPixel(image, _x, _y + radius);
+            PutPixel(image, _x - radius + 1, _y);
+            PutPixel(image, _x, _y - radius + 1);
+
+            float iy = 0;
+            for (int x = 0; x <= radius * Math.Cos(Math.PI / 4); x++)
+            {
+                //Вычисление точного значения координаты Y 
+                iy = (float)Math.Sqrt(radius * radius - x * x);
+
+                //IV квадрант, Y
+                PutPixel(image, _x - x, _y + IPart(iy), 255 - (int)(FPart(iy) * 255));
+                PutPixel(image, _x - x, _y + IPart(iy) + 1, (int)(FPart(iy) * 255));
+                //I квадрант, Y
+                PutPixel(image, _x + x, _y + IPart(iy), 255 - (int)(FPart(iy) * 255));
+                PutPixel(image, _x + x, _y + IPart(iy) + 1, (int)(FPart(iy) * 255));
+                //I квадрант, X
+                PutPixel(image, _x + IPart(iy), _y + x, 255 - (int)(FPart(iy) * 255));
+                PutPixel(image, _x + IPart(iy) + 1, _y + x, (int)(FPart(iy) * 255));
+                //II квадрант, X
+                PutPixel(image, _x + IPart(iy), _y - x, 255 - (int)(FPart(iy) * 255));
+                PutPixel(image, _x + IPart(iy) + 1, _y - x, (int)(FPart(iy) * 255));
+
+                //С помощью инкремента устраняется ошибка смещения на 1 пиксел
+                x++;
+                //II квадрант, Y
+                PutPixel(image, _x + x, _y - IPart(iy), (int)(FPart(iy) * 255));
+                PutPixel(image, _x + x, _y - IPart(iy) + 1, 255 - (int)(FPart(iy) * 255));
+                //III квадрант, Y
+                PutPixel(image, _x - x, _y - IPart(iy), (int)(FPart(iy) * 255));
+                PutPixel(image, _x - x, _y - IPart(iy) + 1, 255 - (int)(FPart(iy) * 255));
+                //III квадрант, X
+                PutPixel(image, _x - IPart(iy), _y - x, (int)(FPart(iy) * 255));
+                PutPixel(image, _x - IPart(iy) + 1, _y - x, 255 - (int)(FPart(iy) * 255));
+                //IV квадрант, X
+                PutPixel(image, _x - IPart(iy), _y + x, (int)(FPart(iy) * 255));
+                PutPixel(image, _x - IPart(iy) + 1, _y + x, 255 - (int)(FPart(iy) * 255));
+                //Возврат значения
+                x--;
+            }
+        }
+
+        private static bool PutPixel(Bitmap image, int x0, int y0, int a)
+        {
+            if ((x0 >= 0 && y0 >= 0) || (x0 < image.Width && y0 < image.Height))
+                image.SetPixel(x0, y0, Color.FromArgb(a,Color.Black));
+            return true;
+        }
+
         private void GenerateBLine(int x, int y)
         {
             Bitmap bitmap = new Bitmap(x + 1, y + 1);
@@ -84,7 +219,7 @@ namespace lab5
                 g.InterpolationMode = InterpolationMode.NearestNeighbor;
                 g.DrawImage(new Bitmap(x + 1, y + 1), 0, 0, x, y);
             }
-
+            bitmap.RotateFlip(RotateFlipType.RotateNoneFlipY);
             pictureBox1.Image = resizeImage(bitmap, pictureBox1.Size);
         }
         private void GenerateBLine(int x0, int y0,int x,int y)
@@ -95,10 +230,11 @@ namespace lab5
 
             using (Graphics g = Graphics.FromImage(bitmap))
             {
+                
                 g.InterpolationMode = InterpolationMode.NearestNeighbor;
                 g.DrawImage(new Bitmap(MaxRadius(x0, x)+2, MaxRadius(y0, y)+2), 0, 0, MaxRadius(x0, x)+2, MaxRadius(y0, y)+2);
             }
-
+            bitmap.RotateFlip(RotateFlipType.RotateNoneFlipY);
             pictureBox1.Image = resizeImage(bitmap, pictureBox1.Size);
         }
         private void GenerateBCircle(int radius)
@@ -110,9 +246,23 @@ namespace lab5
                 g.InterpolationMode = InterpolationMode.NearestNeighbor;
                 g.SmoothingMode = SmoothingMode.None;
                 g.PixelOffsetMode = PixelOffsetMode.HighQuality;
-                g.DrawImage(new Bitmap(radius * 2+10, radius * 2+10), 0, 0, radius * 2+10, radius * 2+10);
+                g.DrawImage(new Bitmap(radius * 2 + 10, radius * 2 + 10), 0, 0, radius * 2 + 10, radius * 2 + 10);
             }
-
+            bitmap.RotateFlip(RotateFlipType.RotateNoneFlipY);
+            pictureBox1.Image = resizeImage(bitmap, pictureBox1.Size);
+        }
+        private void GenerateWuCircle(int radius)
+        {
+            Bitmap bitmap = new Bitmap(radius * 2 + 10, radius * 2 + 10);
+            DrawWuCircle(bitmap, radius);
+            using (Graphics g = Graphics.FromImage(bitmap))
+            {
+                g.InterpolationMode = InterpolationMode.NearestNeighbor;
+                g.SmoothingMode = SmoothingMode.None;
+                g.PixelOffsetMode = PixelOffsetMode.HighQuality;
+                g.DrawImage(new Bitmap(radius * 2 + 10, radius * 2 + 10), 0, 0, radius * 2 + 10, radius * 2 + 10);
+            }
+            bitmap.RotateFlip(RotateFlipType.RotateNoneFlipY);
             pictureBox1.Image = resizeImage(bitmap, pictureBox1.Size);
         }
         public static void BresenhamCircle(Bitmap image, int radius)
@@ -199,6 +349,7 @@ namespace lab5
                 label1.Text = "max x";
                 label2.Text = "max y";
                 y1TB.Enabled = true;
+                x1TB.Enabled = true;
                 if (!isFromNullCB.Checked)
                 {
                     trackBar2.Enabled = true;
@@ -223,8 +374,9 @@ namespace lab5
                 label1.Text = "max x";
                 label2.Text = "max y";
                 y1TB.Enabled = true;
-                
-                    trackBar2.Enabled = true;
+                x1TB.Enabled = true;
+
+                trackBar2.Enabled = true;
                     trackBar1.Enabled = true;
                 
                 trackBar3.Enabled = true;
@@ -232,10 +384,11 @@ namespace lab5
             }
             else if (checkedListBox1.GetSelected(3))
             {
-               // isFromNullCB.Checked = true;
+                // isFromNullCB.Checked = true;
                 label1.Text = "max x";
                 label2.Text = "max y";
                 y1TB.Enabled = true;
+                x1TB.Enabled = true;
                 if (!isFromNullCB.Checked)
                 {
                     trackBar2.Enabled = true;
@@ -244,8 +397,37 @@ namespace lab5
                 trackBar3.Enabled = true;
                 trackBar4.Enabled = true;
             }
-            
-   
+            else if (checkedListBox1.GetSelected(4))
+            {
+                // isFromNullCB.Checked = true;
+                label1.Text = "max x";
+                label2.Text = "max y";
+                y1TB.Text = "10";
+                x1TB.Text = "10";
+                y1TB.Enabled = false;
+                x1TB.Enabled = false;
+                if (!isFromNullCB.Checked)
+                {
+                    trackBar2.Enabled = true;
+                    trackBar1.Enabled = true;
+                }
+                trackBar3.Enabled = true;
+                trackBar4.Enabled = true;
+            }
+            else if (checkedListBox1.GetSelected(5))
+            {
+
+                label1.Text = "radius";
+                label2.Text = "";
+                y1TB.Enabled = false;
+                x1TB.Enabled = true;
+                trackBar2.Enabled = false;
+                trackBar1.Enabled = false;
+                trackBar4.Enabled = false;
+
+            }
+
+
         }
         private void y1TB_TextChanged(object sender, EventArgs e)
         {
@@ -302,6 +484,30 @@ namespace lab5
                // isFromNullCB.Checked = true;
                 GenerateSimple(trackBar1.Value, trackBar2.Value, trackBar3.Value, trackBar4.Value);
             }
+            else if (checkedListBox1.GetSelected(4))
+            {
+                GenerateWu(trackBar1.Value, trackBar2.Value, trackBar3.Value, trackBar4.Value);
+            }
+            else if (checkedListBox1.GetSelected(5))
+            {
+                GenerateWuCircle(trackBar3.Value);
+            }
+        }
+
+        private void GenerateWu(int x0, int y0, int x, int y)
+        {
+            Bitmap bitmap = new Bitmap(MaxRadius(x0, x) + 20, MaxRadius(y0, y) + 20);
+            
+            DrawWuLine(bitmap, x0, y0, x, y);
+
+            using (Graphics g = Graphics.FromImage(bitmap))
+            {
+
+                g.InterpolationMode = InterpolationMode.NearestNeighbor;
+                g.DrawImage(new Bitmap(MaxRadius(x0, x) + 20, MaxRadius(y0, y) + 20), 0, 0, MaxRadius(x0, x) + 20, MaxRadius(y0, y) + 20);
+            }
+            bitmap.RotateFlip(RotateFlipType.RotateNoneFlipY);
+            pictureBox1.Image = resizeImage(bitmap, pictureBox1.Size);
         }
 
         private void GenerateDDA(int x0, int y0, int x1, int y1)
@@ -314,7 +520,7 @@ namespace lab5
                 g.InterpolationMode = InterpolationMode.NearestNeighbor;
                 g.DrawImage(new Bitmap(MaxRadius(x0, x1) + 2, MaxRadius(y0, y1) + 2), 0, 0, MaxRadius(x0, x1) + 2, MaxRadius(y0, y1) + 2);
             }
-
+            bitmap.RotateFlip(RotateFlipType.RotateNoneFlipY);
             pictureBox1.Image = resizeImage(bitmap, pictureBox1.Size);
         }
 
@@ -349,7 +555,7 @@ namespace lab5
                 g.InterpolationMode = InterpolationMode.NearestNeighbor;
                 g.DrawImage(new Bitmap(MaxRadius(x0, x1) + 2, MaxRadius(y0, y1) + 2), 0, 0, MaxRadius(x0, x1) + 2, MaxRadius(y0, y1) + 2);
             }
-
+            bitmap.RotateFlip(RotateFlipType.RotateNoneFlipY);
             pictureBox1.Image = resizeImage(bitmap, pictureBox1.Size);
         }
 
