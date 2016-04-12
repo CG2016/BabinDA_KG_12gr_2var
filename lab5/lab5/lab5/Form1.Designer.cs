@@ -120,12 +120,11 @@
             "BCircle",
             "DDA",
             "Simple iteration",
-            "WuLine (bugs)",
             "WuCircle",
             "BCircleV2"});
             this.checkedListBox1.Location = new System.Drawing.Point(518, 12);
             this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(183, 109);
+            this.checkedListBox1.Size = new System.Drawing.Size(183, 94);
             this.checkedListBox1.TabIndex = 7;
             this.checkedListBox1.SelectedValueChanged += new System.EventHandler(this.checkedListBox1_SelectedValueChanged);
             // 

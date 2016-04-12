@@ -10,13 +10,14 @@ namespace lab5
 {
     public partial class Form1 : Form
     {
+        private static readonly List<Point> DataList = new List<Point>();
+
         public Form1()
         {
             InitializeComponent();
             InitTrackbars();
         }
 
-        private static List<Point> dataList = new List<Point>();
         private void InitTrackbars()
         {
             if (x1TB.Text.Length == 0)
@@ -27,6 +28,7 @@ namespace lab5
             {
                 y1TB.Text = Resources.Form1_InitTrackbars__0;
             }
+
             trackBar1.Maximum = trackBar3.Maximum = Convert.ToInt32(x1TB.Text);
             trackBar1.TickFrequency = trackBar3.TickFrequency = trackBar3.Maximum/10;
             trackBar2.Maximum = trackBar4.Maximum = Convert.ToInt32(y1TB.Text);
@@ -84,10 +86,10 @@ namespace lab5
             if ((x0 >= 0 && y0 >= 0) || (x0 < image.Width && y0 < image.Height))
             {
                 image.SetPixel(x0, y0, Color.Black);
-                        dataList.Add(new Point(x0, y0));
-        }
+                DataList.Add(new Point(x0, y0));
+            }
 
-    return true;
+            return true;
         }
 
         public static void Bresenham4Line(Bitmap image, int x, int y)
@@ -112,20 +114,16 @@ namespace lab5
         {
             try
             {
-                //Вычисление изменения координат
                 var dx = x1 > x0 ? x1 - x0 : x0 - x1;
                 var dy = y1 > y0 ? y1 - y0 : y0 - y1;
-                //Если линия параллельна одной из осей, рисуем обычную линию - заполняем все пикселы в ряд
                 if (dx == 0 || dy == 0)
                 {
                     Line(image, x0, y0, x1, y1);
                     return;
                 }
 
-                //Для Х-линии (коэффициент наклона < 1)
                 if (dy < dx)
                 {
-                    //Первая точка должна иметь меньшую координату Х
                     if (x1 < x0)
                     {
                         x1 += x0;
@@ -134,29 +132,18 @@ namespace lab5
                         y1 += y0;
                         y0 = y1 - y0;
                     }
-                    //Относительное изменение координаты Y
                     var grad = (float) dy/dx;
-                    //Промежуточная переменная для Y
                     var intery = y0 + grad;
-                    //Первая точка
-                    //PutPixel(image, x0, y0);
-
                     for (var x = x0 + 1; x < x1; x++)
                     {
-                        //Верхняя точка
                         PutPixel(image, x, Part(intery), (int) (255 - FPart(intery)*255));
-                        //Нижняя точка
                         PutPixel(image, x, Part(intery) + 1, (int) (FPart(intery)*255));
-                        //Изменение координаты Y
+
                         intery += grad;
                     }
-                    //Последняя точка
-                    //  PutPixel(image, x1, y1);
                 }
-                //Для Y-линии (коэффициент наклона > 1)
                 else
                 {
-                    //Первая точка должна иметь меньшую координату Y
                     if (y1 < y0)
                     {
                         x1 += x0;
@@ -165,24 +152,15 @@ namespace lab5
                         y0 = y1 - y0;
                         y1 -= y0;
                     }
-                    //Относительное изменение координаты X
                     var grad = (float) dx/dy;
-                    //Промежуточная переменная для X
                     var interx = x0 + grad;
-                    //Первая точка
-                    // PutPixel(image, x0, y0);
 
                     for (var y = y0 + 1; y < y1; y++)
                     {
-                        //Верхняя точка
                         PutPixel(image, Part(interx), y, 255 - (int) (FPart(interx)*255));
-                        //Нижняя точка
                         PutPixel(image, Part(interx) + 1, y, (int) (FPart(interx)*255));
-                        //Изменение координаты X
                         interx += grad;
                     }
-                    //Последняя точка
-                    // PutPixel(image, x1, y1);
                 }
             }
             catch (Exception ex)
@@ -194,7 +172,6 @@ namespace lab5
         public static void DrawWuCircle(Bitmap image, int radius)
         {
             int x0 = radius + 5, y0 = radius + 5;
-            //Установка пикселов, лежащих на осях системы координат с началом в центре
             PutPixel(image, x0 + radius, y0);
             PutPixel(image, x0, y0 + radius);
             PutPixel(image, x0 - radius + 1, y0);
@@ -203,37 +180,24 @@ namespace lab5
             float iy;
             for (var x = 0; x <= radius*Math.Cos(Math.PI/4); x++)
             {
-                //Вычисление точного значения координаты Y 
                 iy = (float) Math.Sqrt(radius*radius - x*x);
-
-                //IV квадрант, Y
                 PutPixel(image, x0 - x, y0 + Part(iy), 255 - (int) (FPart(iy)*255));
                 PutPixel(image, x0 - x, y0 + Part(iy) + 1, (int) (FPart(iy)*255));
-                //I квадрант, Y
                 PutPixel(image, x0 + x, y0 + Part(iy), 255 - (int) (FPart(iy)*255));
                 PutPixel(image, x0 + x, y0 + Part(iy) + 1, (int) (FPart(iy)*255));
-                //I квадрант, X
                 PutPixel(image, x0 + Part(iy), y0 + x, 255 - (int) (FPart(iy)*255));
                 PutPixel(image, x0 + Part(iy) + 1, y0 + x, (int) (FPart(iy)*255));
-                //II квадрант, X
                 PutPixel(image, x0 + Part(iy), y0 - x, 255 - (int) (FPart(iy)*255));
                 PutPixel(image, x0 + Part(iy) + 1, y0 - x, (int) (FPart(iy)*255));
-
-                //С помощью инкремента устраняется ошибка смещения на 1 пиксел
                 x++;
-                //II квадрант, Y
                 PutPixel(image, x0 + x, y0 - Part(iy), (int) (FPart(iy)*255));
                 PutPixel(image, x0 + x, y0 - Part(iy) + 1, 255 - (int) (FPart(iy)*255));
-                //III квадрант, Y
                 PutPixel(image, x0 - x, y0 - Part(iy), (int) (FPart(iy)*255));
                 PutPixel(image, x0 - x, y0 - Part(iy) + 1, 255 - (int) (FPart(iy)*255));
-                //III квадрант, X
                 PutPixel(image, x0 - Part(iy), y0 - x, (int) (FPart(iy)*255));
                 PutPixel(image, x0 - Part(iy) + 1, y0 - x, 255 - (int) (FPart(iy)*255));
-                //IV квадрант, X
                 PutPixel(image, x0 - Part(iy), y0 + x, (int) (FPart(iy)*255));
                 PutPixel(image, x0 - Part(iy) + 1, y0 + x, 255 - (int) (FPart(iy)*255));
-                //Возврат значения
                 x--;
             }
         }
@@ -248,13 +212,14 @@ namespace lab5
         private void GenerateBLine(int x, int y)
         {
             var bitmap = new Bitmap(x + 1, y + 1);
+            DrawCoord(bitmap);
             Bresenham4Line(bitmap, x, y);
             using (var g = Graphics.FromImage(bitmap))
             {
                 g.InterpolationMode = InterpolationMode.NearestNeighbor;
                 g.DrawImage(new Bitmap(x + 1, y + 1), 0, 0, x, y);
             }
-            
+
             bitmap.RotateFlip(RotateFlipType.RotateNoneFlipY);
 
             pictureBox1.Image = ResizeImage(bitmap, pictureBox1.Size);
@@ -263,6 +228,7 @@ namespace lab5
         private void GenerateBLine(int x0, int y0, int x, int y)
         {
             var bitmap = new Bitmap(MaxRadius(x0, x) + 2, MaxRadius(y0, y) + 2);
+            DrawCoord(bitmap);
             Line(bitmap, x0, y0, x, y);
 
             using (var g = Graphics.FromImage(bitmap))
@@ -278,6 +244,7 @@ namespace lab5
         private void GenerateBCircle(int radius)
         {
             var bitmap = new Bitmap(radius*2 + 10, radius*2 + 10);
+            DrawCoord(bitmap);
             BresenhamCircle(bitmap, radius);
             using (var g = Graphics.FromImage(bitmap))
             {
@@ -293,6 +260,7 @@ namespace lab5
         private void GenerateWuCircle(int radius)
         {
             var bitmap = new Bitmap(radius*2 + 10, radius*2 + 10);
+            DrawCoord(bitmap);
             DrawWuCircle(bitmap, radius);
             using (var g = Graphics.FromImage(bitmap))
             {
@@ -305,7 +273,31 @@ namespace lab5
             pictureBox1.Image = ResizeImage(bitmap, pictureBox1.Size);
         }
 
-        public static void BresenhamCircle(Bitmap image, int radius)
+        private void DrawCoord(Bitmap bitmap)
+        {
+            for (var i = 0; i < bitmap.Height; i++)
+            {
+                PutPixel(bitmap, 0, i, Color.Red);
+                if (i%10 == 0)
+                    PutPixel(bitmap, 1, i, Color.Red);
+            }
+            for (var i = 0; i < bitmap.Width; i++)
+            {
+                PutPixel(bitmap, i, 0, Color.Red);
+                if (i%10 == 0)
+                    PutPixel(bitmap, i, 1, Color.Red);
+            }
+        }
+
+        private void PutPixel(Bitmap image, int x0, int y0, Color color)
+        {
+            if (x0 < 0 || y0 < 0 || x0 > image.Width - 1 || y0 > image.Height - 1)
+                return;
+            image.SetPixel(x0, y0, color);
+
+        }
+
+        private static void BresenhamCircle(Bitmap image, int radius)
         {
             int x0 = radius + 5, y0 = radius + 5;
             int x = 0, y = radius, gap, delta = 2 - 2*radius;
@@ -334,12 +326,12 @@ namespace lab5
             }
         }
 
-        public static void BresenhamCircleV2(Bitmap image, int radius)
+        private static void BresenhamCircleV2(Bitmap image, int radius)
         {
             int x0 = radius + 5, y0 = radius + 5;
             var x = radius;
             var y = 0;
-            var decisionOver2 = 1 - x; // Decision criterion divided by 2 evaluated at x=r, y=0
+            var decisionOver2 = 1 - x;
 
             while (y <= x)
             {
@@ -354,12 +346,12 @@ namespace lab5
                 y++;
                 if (decisionOver2 <= 0)
                 {
-                    decisionOver2 += 2*y + 1; // Change in decision criterion for y -> y+1
+                    decisionOver2 += 2*y + 1;
                 }
                 else
                 {
                     x--;
-                    decisionOver2 += 2*(y - x) + 1; // Change for y -> y+1, x -> x-1
+                    decisionOver2 += 2*(y - x) + 1;
                 }
             }
         }
@@ -453,7 +445,6 @@ namespace lab5
             }
             else if (checkedListBox1.GetSelected(3))
             {
-                // isFromNullCB.Checked = true;
                 label1.Text = Resources.Form1_checkedListBox1_SelectedValueChanged_max_x;
                 label2.Text = Resources.Form1_checkedListBox1_SelectedValueChanged_max_y;
                 y1TB.Enabled = true;
@@ -466,24 +457,8 @@ namespace lab5
                 trackBar3.Enabled = true;
                 trackBar4.Enabled = true;
             }
+           
             else if (checkedListBox1.GetSelected(4))
-            {
-                // isFromNullCB.Checked = true;
-                label1.Text = Resources.Form1_checkedListBox1_SelectedValueChanged_max_x;
-                label2.Text = Resources.Form1_checkedListBox1_SelectedValueChanged_max_y;
-                // y1TB.Text = "10";
-                // x1TB.Text = "10";
-                y1TB.Enabled = true;
-                x1TB.Enabled = true;
-                if (!isFromNullCB.Checked)
-                {
-                    trackBar2.Enabled = true;
-                    trackBar1.Enabled = true;
-                }
-                trackBar3.Enabled = true;
-                trackBar4.Enabled = true;
-            }
-            else if (checkedListBox1.GetSelected(5))
             {
                 label1.Text = Resources.Form1_checkedListBox1_SelectedValueChanged_radius;
                 label2.Text = "";
@@ -493,7 +468,7 @@ namespace lab5
                 trackBar1.Enabled = false;
                 trackBar4.Enabled = false;
             }
-            else if (checkedListBox1.GetSelected(6))
+            else if (checkedListBox1.GetSelected(5))
             {
                 label1.Text = Resources.Form1_checkedListBox1_SelectedValueChanged_radius;
                 label2.Text = "";
@@ -557,18 +532,14 @@ namespace lab5
             }
             else if (checkedListBox1.GetSelected(3))
             {
-                // isFromNullCB.Checked = true;
                 GenerateSimple(trackBar1.Value, trackBar2.Value, trackBar3.Value, trackBar4.Value);
             }
+           
             else if (checkedListBox1.GetSelected(4))
-            {
-                GenerateWu(trackBar1.Value, trackBar2.Value, trackBar3.Value, trackBar4.Value);
-            }
-            else if (checkedListBox1.GetSelected(5))
             {
                 GenerateWuCircle(trackBar3.Value);
             }
-            else if (checkedListBox1.GetSelected(6))
+            else if (checkedListBox1.GetSelected(5))
             {
                 GenerateCircleV2(trackBar3.Value);
             }
@@ -577,6 +548,7 @@ namespace lab5
         private void GenerateCircleV2(int radius)
         {
             var bitmap = new Bitmap(radius*2 + 10, radius*2 + 10);
+            DrawCoord(bitmap);
             BresenhamCircleV2(bitmap, radius);
             using (var g = Graphics.FromImage(bitmap))
             {
@@ -592,7 +564,7 @@ namespace lab5
         private void GenerateWu(int x0, int y0, int x, int y)
         {
             var bitmap = new Bitmap(MaxRadius(x0, x)*2 + 2, MaxRadius(y0, y)*2 + 2);
-
+            DrawCoord(bitmap);
             DrawWuLine(bitmap, x0, y0, x, y);
 
             using (var g = Graphics.FromImage(bitmap))
@@ -608,6 +580,7 @@ namespace lab5
         private void GenerateDda(int x0, int y0, int x1, int y1)
         {
             var bitmap = new Bitmap(MaxRadius(x0, x1) + 2, MaxRadius(y0, y1) + 2);
+            DrawCoord(bitmap);
             Dda(bitmap, x0, y0, x1, y1);
 
             using (var g = Graphics.FromImage(bitmap))
@@ -632,18 +605,19 @@ namespace lab5
                 step = Math.Abs(dy);
             xInc = (float) dx/step;
             yInc = (float) dy/step;
-            PutPixel(bitmap, (int) x, (int) y);
+            PutPixel(bitmap, (int) Math.Round(x), (int) Math.Round(y));
             for (k = 0; k < step; k++)
             {
                 x += xInc;
                 y += yInc;
-                PutPixel(bitmap, (int) x, (int) y);
+                PutPixel(bitmap, (int)Math.Round(x), (int)Math.Round(y));
             }
         }
 
         private void GenerateSimple(int x0, int y0, int x1, int y1)
         {
             var bitmap = new Bitmap(MaxRadius(x0, x1) + 2, MaxRadius(y0, y1) + 2);
+            DrawCoord(bitmap);
             Simple(bitmap, x0, y0, x1, y1);
 
             using (var g = Graphics.FromImage(bitmap))
@@ -658,72 +632,54 @@ namespace lab5
 
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
-            dataList.Clear();
+            DataList.Clear();
             ShowLine();
             DrawGraph();
-            
-            
         }
 
         private void trackBar2_Scroll(object sender, EventArgs e)
         {
-            dataList.Clear();
+            DataList.Clear();
             ShowLine();
             DrawGraph();
         }
 
         private void trackBar3_Scroll(object sender, EventArgs e)
         {
-            dataList.Clear();
+            DataList.Clear();
             ShowLine();
             DrawGraph();
         }
 
         private void trackBar4_Scroll(object sender, EventArgs e)
         {
-            dataList.Clear();
+            DataList.Clear();
             ShowLine();
             DrawGraph();
         }
+
         private void DrawGraph()
         {
-            // Получим панель для рисования
-            GraphPane pane = zedGraphControl1.GraphPane;
-
-            // Очистим список кривых на тот случай, если до этого сигналы уже были нарисованы
-            pane.CurveList.Clear();
-
-            // Создадим список точек
-            PointPairList list = new PointPairList();
-
-          
-
-            // Заполняем список точек
-            foreach (Point point in dataList)
+            var pane = zedGraphControl1.GraphPane;
+            pane.GraphObjList.Clear();
+            //var list = new PointPairList();
+            int maxx=0, maxy = 0;
+            foreach (var point in DataList)
             {
-                list.Add(point.X,point.Y);
+                maxx = Math.Max(maxx, point.X);
+                maxy = Math.Max(maxy, point.Y);
+               
+                BoxObj boxObj = new BoxObj(point.X-0.5,point.Y+0.5,1,1,Color.Blue,Color.Blue);
+                boxObj.IsVisible = true;
+                boxObj.Location.CoordinateFrame = CoordType.AxisXYScale;
+                boxObj.ZOrder = ZOrder.A_InFront;
+              pane.GraphObjList.Add(boxObj);
             }
-            
-            // Создадим кривую с названием "Sinc", 
-            // которая будет рисоваться голубым цветом (Color.Blue),
-            // Опорные точки выделяться не будут (SymbolType.None)
-            LineItem myCurve = pane.AddCurve("Sinc", list, Color.Blue, SymbolType.Square);
-            myCurve.Line.IsVisible = false;
-            myCurve.Symbol.Fill.Color = Color.Blue;
 
-            // !!!
-            // Тип заполнения - сплошная заливка
-            myCurve.Symbol.Fill.Type = FillType.Solid;
-            
-            // !!!
-            // Размер ромбиков
-            myCurve.Symbol.Size = 5;
-            // Вызываем метод AxisChange (), чтобы обновить данные об осях. 
-            // В противном случае на рисунке будет показана только часть графика, 
-            // которая умещается в интервалы по осям, установленные по умолчанию
+            pane.YAxis.Scale.Max = 100;//* maxy+10;
+            pane.XAxis.Scale.Max = 100;// maxx+10;
+
             zedGraphControl1.AxisChange();
-
-            // Обновляем график
             zedGraphControl1.Invalidate();
         }
     }
