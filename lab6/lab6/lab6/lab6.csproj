@@ -43,6 +43,7 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>true</Prefer32Bit>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <OutputPath>bin\x64\Release\</OutputPath>
@@ -53,6 +54,7 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>true</Prefer32Bit>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AForge, Version=2.2.5.0, Culture=neutral, PublicKeyToken=c1db6ff4eaa06aeb, processorArchitecture=MSIL">
@@ -84,16 +86,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Binarization\ErrorDiffusionToAdjacentNeighbors.cs" />
+    <Compile Include="Binarization\BradleyLocalTHresholding.cs" />
+    <Compile Include="ImageProcessing\AdaptiveSmoothing.cs" />
+    <Compile Include="Binarization\BayerDithering.cs" />
+    <Compile Include="ImageProcessing\ContrastCorrection.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="GrayBMP_File.cs" />
-    <Compile Include="ImageConverter.cs" />
+    <Compile Include="ImageProcessing\GammaCorrection.cs" />
+    <Compile Include="ConvertToGrayscale\GrayBMP_File.cs" />
+    <Compile Include="ConvertToGrayscale\ImageConverter.cs" />
+    <Compile Include="ImageProcessing\Invert.cs" />
+    <Compile Include="Binarization\JarvisJudiceNinkeDithering.cs" />
+    <Compile Include="ImageProcessing\LevelsLinear.cs" />
+    <Compile Include="Binarization\OtsuDithering.cs" />
+    <Compile Include="Binarization\IterativeThreshold.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Binarization\SierraDithering.cs" />
+    <Compile Include="Binarization\Threshold.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -105,6 +120,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

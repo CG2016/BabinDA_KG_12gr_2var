@@ -1,16 +1,26 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Drawing.Imaging;
+using System.Globalization;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using AForge;
 using AForge.Imaging.Filters;
 using ImageMagick;
+using lab6.ConvertToGrayscale;
+using lab6.Properties;
+using AdaptiveSmoothing = lab6.ImageProcessing.AdaptiveSmoothing;
+using BayerDithering = lab6.Binarization.BayerDithering;
+using BradleyLocalThresholding = lab6.Binarization.BradleyLocalThresholding;
+using ContrastCorrection = lab6.ImageProcessing.ContrastCorrection;
+using GammaCorrection = lab6.ImageProcessing.GammaCorrection;
+using ImageConverter = lab6.ConvertToGrayscale.ImageConverter;
+using Invert = lab6.ImageProcessing.Invert;
+using IterativeThreshold = lab6.Binarization.IterativeThreshold;
+using JarvisJudiceNinkeDithering = lab6.Binarization.JarvisJudiceNinkeDithering;
+using LevelsLinear = lab6.ImageProcessing.LevelsLinear;
+using OtsuThreshold = lab6.Binarization.OtsuThreshold;
+using SierraDithering = lab6.Binarization.SierraDithering;
+using Threshold = lab6.Binarization.Threshold;
 
 namespace lab6
 {
@@ -21,21 +31,18 @@ namespace lab6
         public Lab6()
         {
             InitializeComponent();
-
         }
-       
-        
 
 
         private void LoadImageButton_Click(object sender, EventArgs e)
         {
             LoadImage();
         }
+
         private void LoadImage()
         {
             var file = new OpenFileDialog();
-            file.Filter = "BMP|*.bmp|GIF|*.gif|JPG|*.jpg;*.jpeg|PNG|*.png|TIFF|*.tif;*.tiff|"
-                          + "All Graphics Types|*.bmp;*.jpg;*.jpeg;*.png;*.tif;*.tiff|"+"All|*.*";
+            file.Filter = Resources.Filter_Formats;
             file.FilterIndex = 6;
             if (file.ShowDialog() == DialogResult.OK)
             {
@@ -46,21 +53,21 @@ namespace lab6
 
                     if (extension == ".PCX")
                     {
-                        using (MagickImage magickImage = new MagickImage(file.FileName))
+                        using (var magickImage = new MagickImage(file.FileName))
                         {
                             magickImage.Format = MagickFormat.Gray;
                             _image = magickImage.ToBitmap();
-                            byte[] gray = GrayBMP_File.CreateGrayBitmapArray(_image);
-                            _image = ImageConverter.byteArrayToImage(gray);
+                            var gray = GrayBmpFile.CreateGrayBitmapArray(_image);
+                            _image = ImageConverter.ByteArrayToImage(gray);
                         }
                     }
                     else
                     {
                         _image = Image.FromFile(file.FileName);
-                        byte[] gray = GrayBMP_File.CreateGrayBitmapArray(_image);
-                       _image = ImageConverter.byteArrayToImage(gray);
+                        var gray = GrayBmpFile.CreateGrayBitmapArray(_image);
+                        _image = ImageConverter.ByteArrayToImage(gray);
                     }
-                    
+
                     pictureBox1.Image = _image;
                 }
             }
@@ -68,67 +75,74 @@ namespace lab6
 
         private void invertCB_CheckedChanged(object sender, EventArgs e)
         {
+            InvertImage();
+        }
+
+        private void InvertImage()
+        {
             if (invertCB.Checked)
                 if (_image != null)
                 {
-                    Bitmap fImage = (Bitmap)pictureBox1.Image;
-                    Invert filter = new Invert();
-                    Bitmap result = filter.Apply(fImage);
+                    var fImage = (Bitmap)pictureBox1.Image;
+                    var filter = new Invert();
+                    var result = filter.Apply(fImage);
                     pictureBox2.Image = new Bitmap(result);
-
-
                 }
-
         }
+       
+
         private void contrastCorrectionCB_CheckedChanged(object sender, EventArgs e)
+        {
+            ContrastCorrection();
+        }
+
+        private void ContrastCorrection()
         {
             if (contrastCorrectionCB.Checked)
                 if (_image != null)
-            {
-                Bitmap fImage = (Bitmap)pictureBox1.Image;
-                    ContrastCorrection filter = new ContrastCorrection();
-                    Bitmap result = filter.Apply(fImage);
-                pictureBox2.Image = result;
-                
-            }
+                {
+                    var fImage = (Bitmap) pictureBox1.Image;
+                    var filter = new ContrastCorrection(contrastTBar.Value);
+                    var result = filter.Apply(fImage);
+                    pictureBox2.Image = result;
+                }
         }
 
         private void adaptiveSmoothingCB_CheckedChanged(object sender, EventArgs e)
         {
+            Smoothing();
+        }
+
+        private void Smoothing()
+        {
             if (adaptiveSmoothingCB.Checked)
                 if (_image != null)
-            {
-                Bitmap fImage = (Bitmap)pictureBox1.Image;
-                    AdaptiveSmoothing filter = new AdaptiveSmoothing();
-                    Bitmap result = filter.Apply(fImage);
-                pictureBox2.Image = new Bitmap(result);
+                {
+                    var fImage = (Bitmap) pictureBox1.Image;
+                    var filter = new AdaptiveSmoothing(smoothTBar.Value);
+                    var result = filter.Apply(fImage);
+                    pictureBox2.Image = new Bitmap(result);
                 }
         }
 
         private void gammaCorrectionCB_CheckedChanged(object sender, EventArgs e)
         {
+            GammaCorrection();
+        }
+
+        private void GammaCorrection()
+        {
             if (gammaCorrectionCB.Checked)
                 if (_image != null)
-            {
-                Bitmap fImage = (Bitmap)pictureBox1.Image;
-                    GammaCorrection filter = new GammaCorrection();
-                   
-                Bitmap resilt = filter.Apply(fImage);
+                {
+                    var fImage = (Bitmap) pictureBox1.Image;
+                    var filter = new GammaCorrection(gammaTBar.Value*0.01);
+
+                    var resilt = filter.Apply(fImage);
                     pictureBox2.Image = new Bitmap(resilt);
                 }
         }
 
-        private void levelCorrectionCB_CheckedChanged(object sender, EventArgs e)
-        {
-            if(levelCorrectionCB.Checked)
-            if (_image != null)
-            {
-                Bitmap fImage = (Bitmap)pictureBox1.Image;
-                    LevelsLinear filter = new LevelsLinear();
-                    Bitmap result = filter.Apply(fImage);
-                pictureBox2.Image = new Bitmap(result);
-                }
-        }
 
         private void binarizationTresholdCB_CheckedChanged(object sender, EventArgs e)
         {
@@ -137,15 +151,14 @@ namespace lab6
 
         private void BinarizationThreshold()
         {
-            if (binarizationTresholdCB.Checked)
+            if (binarizationDownTresholdCB.Checked || binarizationUpThresholdCB.Checked)
             {
-                Image image = pictureBox1.Image;
-                Threshold filter = new Threshold(thresholdTB.Value);
+                var image = pictureBox1.Image;
+                var filter = new Threshold((binarizationUpThresholdCB.Checked)?(thresholdTB.Maximum-thresholdTB.Value):thresholdTB.Value);
                 // apply the filter
-               Bitmap result = filter.Apply((Bitmap) image);
-                pictureBox2.Image = result;
+                var result = filter.Apply((Bitmap) image);
+                    pictureBox2.Image = result;
             }
-           
         }
 
         private void binarizationJarvisCB_CheckedChanged(object sender, EventArgs e)
@@ -155,41 +168,58 @@ namespace lab6
 
         private void BinarizationJarvis()
         {
-
             if (binarizationJarvisCB.Checked)
             {
-                Image image = pictureBox1.Image;
-                JarvisJudiceNinkeDithering filter = new JarvisJudiceNinkeDithering();
-                // apply the filter
-                Bitmap result = filter.Apply((Bitmap)image);
+                var image = pictureBox1.Image;
+                var filter = new JarvisJudiceNinkeDithering();
+                var result = filter.Apply((Bitmap) image);
                 pictureBox2.Image = result;
             }
         }
 
+        private void LinearCorrection()
+        {
+            if (linearCB.Checked)
+            {
+                var image = pictureBox1.Image;
+                var filter = new LevelsLinear();
+                // set ranges
 
+                filter.InGray = new IntRange(linearMinTBar.Value, linearMaxTBar.Value);
+                // apply the filter
+                var result = filter.Apply((Bitmap) image);
+                pictureBox2.Image = result;
+            }
+        }
+        private void IterativeBinarization()
+        {
+            if (iterativeCB.Checked)
+            {
+                var image = pictureBox1.Image;
+                // create filter
+                var filter = new IterativeThreshold(linearMinTBar.Value, linearMaxTBar.Value);
 
-
-
-
-
+                // apply the filter
+                var result = filter.Apply((Bitmap)image);
+                pictureBox2.Image = result;
+            }
+        }
         private
             void thresholdTB_Scroll(object sender, EventArgs e)
         {
             thresholdTextBox.Text = thresholdTB.Value.ToString();
-            if (binarizationTresholdCB.Checked)
+            if (binarizationDownTresholdCB.Checked || binarizationUpThresholdCB.Checked)
                 BinarizationThreshold();
-         
-
         }
 
         private void binarizationBayerCB_CheckedChanged(object sender, EventArgs e)
         {
             if (binarizationBayerCB.Checked)
             {
-                Image image = pictureBox1.Image;
-                BayerDithering filter = new BayerDithering();
-                // apply the filter
-                Bitmap result = filter.Apply((Bitmap)image);
+                var image = pictureBox1.Image;
+                var filter = new BayerDithering();
+
+                var result = filter.Apply((Bitmap) image);
                 pictureBox2.Image = result;
             }
         }
@@ -198,10 +228,10 @@ namespace lab6
         {
             if (binarizationSierraCB.Checked)
             {
-                Image image = pictureBox1.Image;
-                SierraDithering filter = new SierraDithering();
-                // apply the filter
-                Bitmap result = filter.Apply((Bitmap)image);
+                var image = pictureBox1.Image;
+                var filter = new SierraDithering();
+
+                var result = filter.Apply((Bitmap) image);
                 pictureBox2.Image = result;
             }
         }
@@ -210,13 +240,76 @@ namespace lab6
         {
             if (otsuCB.Checked)
             {
-                Image image = pictureBox1.Image;
-                OtsuThreshold filter = new OtsuThreshold();
-                // apply the filter
-                Bitmap result = filter.Apply((Bitmap)image);
+                var image = pictureBox1.Image;
+                var filter = new OtsuThreshold();
+
+                var result = filter.Apply((Bitmap) image);
                 pictureBox2.Image = result;
             }
         }
 
+        private void contrastTBar_Scroll(object sender, EventArgs e)
+        {
+            contrastTBox.Text = contrastTBar.Value.ToString();
+            ContrastCorrection();
+        }
+
+        private void smoothTBar_Scroll(object sender, EventArgs e)
+        {
+            smoothTBox.Text = smoothTBar.Value.ToString();
+            Smoothing();
+        }
+
+        private void trackBar1_Scroll(object sender, EventArgs e)
+        {
+            gammaTBox.Text = (gammaTBar.Value*0.01).ToString(CultureInfo.CurrentCulture);
+            GammaCorrection();
+        }
+
+        private void linearMinTBar_Scroll(object sender, EventArgs e)
+        {
+            linearMinTBox.Text = linearMinTBar.Value.ToString();
+            linearMaxTBox.Text = linearMaxTBar.Value.ToString();
+            LinearCorrection();
+            IterativeBinarization();
+        }
+
+
+
+
+        private void linearMaxTBar_Scroll(object sender, EventArgs e)
+        {
+            linearMinTBox.Text = linearMinTBar.Value.ToString();
+            linearMaxTBox.Text = linearMaxTBar.Value.ToString();
+            LinearCorrection();
+            IterativeBinarization();
+        }
+
+        private void binarizationDownCB_CheckedChanged(object sender, EventArgs e)
+        {
+            BinarizationThreshold();
+        }
+
+        private void iterativeCB_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bradlyCB_CheckedChanged(object sender, EventArgs e)
+        {
+            BradlyBinarization();
+        }
+
+        private void BradlyBinarization()
+        {
+            if (bradlyCB.Checked)
+            {
+                var image = pictureBox1.Image;
+                var filter = new BradleyLocalThresholding();
+
+                var result = filter.Apply((Bitmap)image);
+                pictureBox2.Image = result;
+            }
+        }
     }
 }
