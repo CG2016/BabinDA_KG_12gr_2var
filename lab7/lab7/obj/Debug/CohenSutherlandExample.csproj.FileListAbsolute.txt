@@ -1,0 +1,9 @@
+D:\Dropbox\source\3k\6s\kg\CohenSunderlandExample\bin\Debug\CohenSutherlandExample.exe.config
+D:\Dropbox\source\3k\6s\kg\CohenSunderlandExample\obj\Debug\CohenSutherlandExample.csprojResolveAssemblyReference.cache
+D:\Dropbox\source\3k\6s\kg\CohenSunderlandExample\obj\Debug\CohenSutherlandExample.Form1.resources
+D:\Dropbox\source\3k\6s\kg\CohenSunderlandExample\obj\Debug\CohenSutherlandExample.Properties.Resources.resources
+D:\Dropbox\source\3k\6s\kg\CohenSunderlandExample\obj\Debug\CohenSutherlandExample.csproj.GenerateResource.Cache
+D:\Dropbox\source\3k\6s\kg\CohenSunderlandExample\bin\Debug\CohenSutherlandExample.exe
+D:\Dropbox\source\3k\6s\kg\CohenSunderlandExample\bin\Debug\CohenSutherlandExample.pdb
+D:\Dropbox\source\3k\6s\kg\CohenSunderlandExample\obj\Debug\CohenSutherlandExample.exe
+D:\Dropbox\source\3k\6s\kg\CohenSunderlandExample\obj\Debug\CohenSutherlandExample.pdb
