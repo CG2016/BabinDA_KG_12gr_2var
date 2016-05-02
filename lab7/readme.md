@@ -1,4 +1,4 @@
-<h1 style="text-align: center;"><span style="color: #008000;">Лабораторная работа №6</span></h1>
+<h1 style="text-align: center;"><span style="color: #008000;">Лабораторная работа №7</span></h1>
 <p style="text-align: center;"><a title="Author" href="https://vk.com/dimababin" target="_blank"><img src="https://github.com/CG2016/BabinDA_KG_12gr_2var/blob/master/lab7/Result/result.PNG" alt="" height="500" align="center" /></a></p>
 
 <h3><span style="color: #008000;">Програма для отображения алгоритмов отсечения отрезков прямоугольником и выпуклым многоугольником</span></h3>
