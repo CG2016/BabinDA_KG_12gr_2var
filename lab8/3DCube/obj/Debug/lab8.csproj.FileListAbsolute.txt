@@ -1,0 +1,15 @@
+C:\Users\Dmitry\Desktop\3DCubeNoGimbalLock\3DCube\obj\Debug\lab8.csproj.GenerateResource.Cache
+C:\Users\Dmitry\Desktop\3DCubeNoGimbalLock\3DCube\bin\Debug\lab8.exe
+C:\Users\Dmitry\Desktop\3DCubeNoGimbalLock\3DCube\bin\Debug\lab8.pdb
+C:\Users\Dmitry\Desktop\3DCubeNoGimbalLock\3DCube\obj\Debug\lab8.Form.resources
+C:\Users\Dmitry\Desktop\3DCubeNoGimbalLock\3DCube\obj\Debug\lab8.Properties.Resources.resources
+C:\Users\Dmitry\Desktop\3DCubeNoGimbalLock\3DCube\obj\Debug\lab8.exe
+C:\Users\Dmitry\Desktop\3DCubeNoGimbalLock\3DCube\obj\Debug\lab8.pdb
+D:\Dropbox\source\3k\6s\kg\github_labs\lab8\3DCube\obj\Debug\lab8.exe
+D:\Dropbox\source\3k\6s\kg\github_labs\lab8\3DCube\obj\Debug\lab8.pdb
+D:\Dropbox\source\3k\6s\kg\github_labs\lab8\3DCube\bin\Debug\lab8.exe
+D:\Dropbox\source\3k\6s\kg\github_labs\lab8\3DCube\bin\Debug\lab8.pdb
+D:\Dropbox\source\3k\6s\kg\github_labs\lab8\3DCube\obj\Debug\lab8.csprojResolveAssemblyReference.cache
+D:\Dropbox\source\3k\6s\kg\github_labs\lab8\3DCube\obj\Debug\lab8.Form.resources
+D:\Dropbox\source\3k\6s\kg\github_labs\lab8\3DCube\obj\Debug\lab8.Properties.Resources.resources
+D:\Dropbox\source\3k\6s\kg\github_labs\lab8\3DCube\obj\Debug\lab8.csproj.GenerateResource.Cache
