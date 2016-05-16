@@ -154,7 +154,7 @@ namespace lab8
             private readonly Vector3D _cubeOrigin;
 
             private Face[] _faces;
-
+            private int window;
             private float _xRotation;
             private float _yRotation;
             private float _zRotation;
@@ -218,7 +218,7 @@ namespace lab8
                 bounds.Width += drawOrigin.X;
                 bounds.Height += drawOrigin.Y;
 
-                // Bitmap finalBmp = new Bitmap(bounds.Width, bounds.Height);
+              
                 var g = Graphics.FromImage(finalBmp);
 
                 g.SmoothingMode = SmoothingMode.AntiAlias;
@@ -279,7 +279,7 @@ namespace lab8
                 bounds.Width += drawOrigin.X;
                 bounds.Height += drawOrigin.Y;
 
-                var finalBmp = new Bitmap(bounds.Width, bounds.Height);
+                var finalBmp = new Bitmap(bounds.Width+10, bounds.Height+10);
                 var g = Graphics.FromImage(finalBmp);
 
                 g.SmoothingMode = SmoothingMode.AntiAlias;
@@ -323,6 +323,7 @@ namespace lab8
                         g.DrawLine(Pens.Black, _faces[i].Corners2D[2], _faces[i].Corners2D[3]);
                         g.DrawLine(Pens.Black, _faces[i].Corners2D[3], _faces[i].Corners2D[0]);
                     }
+                   
                 }
 
                 g.Dispose();
@@ -341,14 +342,14 @@ namespace lab8
             {
                 var returnPoint = new PointF();
 
-                var zoom = Screen.PrimaryScreen.Bounds.Width/1.5f;
+                var zoom = Screen.PrimaryScreen.Bounds.Width/1;
                 var tempCam = new Camera();
 
                 tempCam.Position.X = _cubeOrigin.X;
                 tempCam.Position.Y = _cubeOrigin.Y;
                 tempCam.Position.Z = _cubeOrigin.X*zoom/_cubeOrigin.X;
 
-                var zValue = -vec.Z - tempCam.Position.Z;
+                var zValue =/* -vec.Z*/ - tempCam.Position.Z;
 
                 returnPoint.X = (tempCam.Position.X - vec.X)/zValue*zoom;
                 returnPoint.Y = (tempCam.Position.Y - vec.Y)/zValue*zoom;
@@ -614,41 +615,45 @@ namespace lab8
 
             #region Initializers
 
-            public Cube(int side)
+            public Cube(int side, int window)
             {
                 Width = side;
+                this.window = window;
                 Height = side;
                 Depth = side;
                 _cubeOrigin = new Vector3D(Width/2, Height/2, Depth/2);
                 InitializeCube();
             }
 
-            public Cube(int side, Vector3D origin)
+            public Cube(int side, Vector3D origin, int window)
             {
                 Width = side;
                 Height = side;
                 Depth = side;
                 _cubeOrigin = origin;
+                this.window = window;
 
                 InitializeCube();
             }
 
-            public Cube(int width, int height, int depth)
+            public Cube(int width, int height, int depth, int window)
             {
                 Width = width;
                 Height = height;
                 Depth = depth;
+                this.window = window;
                 _cubeOrigin = new Vector3D(Width/2, Height/2, Depth/2);
 
                 InitializeCube();
             }
 
-            public Cube(int width, int height, int depth, Vector3D origin)
+            public Cube(int width, int height, int depth, Vector3D origin, int window)
             {
                 Width = width;
                 Height = height;
                 Depth = depth;
                 _cubeOrigin = origin;
+                this.window = window;
 
                 InitializeCube();
             }

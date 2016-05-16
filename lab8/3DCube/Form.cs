@@ -214,17 +214,17 @@ namespace lab8
         {
             _drawOrigin3 = _drawOrigin2 = _drawOrigin = new Point(pictureBox1.Width/2, pictureBox1.Height/2);
 
-            _mainCube1 = new Math3D.Cube(w, h/2, d, new Math3D.Vector3D(w/2, 0, d/2));
-            _mainCube12 = new Math3D.Cube(w/5, h/2, d, new Math3D.Vector3D(w/2, h/2, d/2));
-            _mainCube13 = new Math3D.Cube(w, h/10, d, new Math3D.Vector3D(w/2, h/2, d/2));
+            _mainCube1 = new Math3D.Cube(w, h/2, d, new Math3D.Vector3D(w/2, 0, d/2),1);
+            _mainCube12 = new Math3D.Cube(w/5, h/2, d, new Math3D.Vector3D(w/2, h/2, d/2),1);
+            _mainCube13 = new Math3D.Cube(w, h/10, d, new Math3D.Vector3D(w/2, h/2, d/2),1);
 
-            _mainCube2 = new Math3D.Cube(w, h/2, d, new Math3D.Vector3D(w/2, 0, d/2));
-            _mainCube22 = new Math3D.Cube(w/5, h/2, d, new Math3D.Vector3D(w/2, h/2, d/2));
-            _mainCube23 = new Math3D.Cube(w, h/10, d, new Math3D.Vector3D(w/2, h/2, d/2));
+            _mainCube2 = new Math3D.Cube(w, h/2, d, new Math3D.Vector3D(w/2, 0, d/2),2);
+            _mainCube22 = new Math3D.Cube(w/5, h/2, d, new Math3D.Vector3D(w/2, h/2, d/2),2);
+            _mainCube23 = new Math3D.Cube(w, h/10, d, new Math3D.Vector3D(w/2, h/2, d/2),2);
 
-            _mainCube3 = new Math3D.Cube(w, h/2, d, new Math3D.Vector3D(w/2, 0, d/2));
-            _mainCube32 = new Math3D.Cube(w/5, h/2, d, new Math3D.Vector3D(w/2, h/2, d/2));
-            _mainCube33 = new Math3D.Cube(w, h/10, d, new Math3D.Vector3D(w/2, h/2, d/2));
+            _mainCube3 = new Math3D.Cube(w, h/2, d, new Math3D.Vector3D(w/2, 0, d/2),3);
+            _mainCube32 = new Math3D.Cube(w/5, h/2, d, new Math3D.Vector3D(w/2, h/2, d/2),3);
+            _mainCube33 = new Math3D.Cube(w, h/10, d, new Math3D.Vector3D(w/2, h/2, d/2),3);
         }
 
         private void Render()
@@ -279,7 +279,7 @@ namespace lab8
 
         private void FormRender_Load(object sender, EventArgs e)
         {
-            var size = 160;
+            var size = 180;
             SetCharSize(size);
             GenerateCharB(_w, _h, _d);
         }
